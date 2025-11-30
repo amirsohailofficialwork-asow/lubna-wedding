@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lubna & Izaan | Glorious Moments</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&family=Great+Vibes&family=Lato:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- React & ReactDOM -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    
+    <!-- Babel for JSX -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <style>
+      body {
+        font-family: 'Lato', sans-serif;
+        background-color: #fcfaf8;
+        color: #444;
+      }
+      .font-script {
+        font-family: 'Great Vibes', cursive;
+      }
+      .font-serif {
+        font-family: 'Playfair Display', serif;
+      }
+      .font-cinzel {
+        font-family: 'Cinzel', serif;
+      }
+      /* Custom scrollbar */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #f1f1f1;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #d4af37;
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #b59020;
+      }
+    </style>
+<script type="importmap">
+{
+  "imports": {
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.30.0",
+    "framer-motion": "https://aistudiocdn.com/framer-motion@^12.23.24",
+    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.555.0"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+      const { useState, useEffect, useRef } = React;
+
+      // --- Icons (Inline SVGs) ---
+      const Icon = ({ path, size = 16, className = "" }) => (
+        <svg 
+          xmlns="http://www.w3.org/2000/svg" 
+          width={size} 
+          height={size} 
+          viewBox="0 0 24 24" 
+          fill="none" 
+          stroke="currentColor" 
+          strokeWidth="2" 
+          strokeLinecap="round" 
+          strokeLinejoin="round" 
+          className={className}
+        >
+          {path}
+        </svg>
+      );
+
+      const Icons = {
+        Calendar: (props) => <Icon {...props} path={<><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></>} />,
+        MapPin: (props) => <Icon {...props} path={<><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></>} />,
+        Heart: (props) => <Icon {...props} path={<path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>} />,
+        Clock: (props) => <Icon {...props} path={<><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></>} />,
+        Music: (props) => <Icon {...props} path={<><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></>} />,
+        Volume2: (props) => <Icon {...props} path={<><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></>} />,
+        VolumeX: (props) => <Icon {...props} path={<><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></>} />,
+        Share2: (props) => <Icon {...props} path={<><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></>} />,
+        Sparkles: (props) => <Icon {...props} path={<><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"></path><path d="M5 3v4"></path><path d="M9 5h-4"></path><path d="M6 17v4"></path><path d="M8 19h-4"></path></>} />,
+        Copy: (props) => <Icon {...props} path={<><rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></>} />,
+        Check: (props) => <Icon {...props} path={<polyline points="20 6 9 17 4 12"></polyline>} />,
+        MessageCircle: (props) => <Icon {...props} path={<><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></>} />,
+        MessageSquare: (props) => <Icon {...props} path={<><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></>} />,
+        Invocation: (props) => (
+           <svg viewBox="0 0 24 24" fill="currentColor" width={props.size || 24} height={props.size || 24} className={props.className}>
+             <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+           </svg>
+        )
+      };
+
+      // --- Components/Ornament ---
+      const Divider = ({ className }) => (
+        <div className={`flex items-center justify-center space-x-4 my-6 opacity-60 ${className}`}>
+          <div className="h-[1px] w-16 bg-amber-600"></div>
+          <div className="text-amber-700 text-xl">❦</div>
+          <div className="h-[1px] w-16 bg-amber-600"></div>
+        </div>
+      );
+
+      const FloralCorner = ({ className, rotation = 0 }) => (
+        <svg 
+          className={className} 
+          style={{ transform: `rotate(${rotation}deg)` }}
+          width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg"
+        >
+          <path d="M0 0C50 0 100 50 100 100V0H0Z" fill="#d4af37" fillOpacity="0.2"/>
+        </svg>
+      );
+
+      // --- Components/FadeIn (Custom Implementation without Framer Motion) ---
+      const FadeIn = ({ children, delay = 0, direction = 'up', className = '' }) => {
+        const [isVisible, setIsVisible] = useState(false);
+        const ref = useRef(null);
+
+        useEffect(() => {
+          const observer = new IntersectionObserver(([entry]) => {
+            if (entry.isIntersecting) {
+              setIsVisible(true);
+              observer.disconnect();
+            }
+          }, { threshold: 0.1 });
+          
+          if (ref.current) observer.observe(ref.current);
+          return () => observer.disconnect();
+        }, []);
+
+        const getDirectionClass = () => {
+          if (isVisible) return 'translate-x-0 translate-y-0 opacity-100';
+          switch(direction) {
+            case 'up': return 'translate-y-10 opacity-0';
+            case 'down': return '-translate-y-10 opacity-0';
+            case 'left': return '-translate-x-10 opacity-0';
+            case 'right': return 'translate-x-10 opacity-0';
+            default: return 'opacity-0';
+          }
+        };
+
+        return (
+          <div 
+            ref={ref}
+            className={`transition-all duration-1000 ease-out ${getDirectionClass()} ${className}`}
+            style={{ transitionDelay: `${delay}s` }}
+          >
+            {children}
+          </div>
+        );
+      };
+
+      // --- Components/WishGenerator (Offline Version) ---
+      const WishGenerator = () => {
+        const [relation, setRelation] = useState('friend');
+        const [tone, setTone] = useState('heartfelt');
+        const [wish, setWish] = useState('');
+        const [loading, setLoading] = useState(false);
+        const [copied, setCopied] = useState(false);
+
+        // Offline Database of Wishes
+        const wishDatabase = {
+          friend: {
+            heartfelt: [
+              "Wishing you both a lifetime of happiness and love. Congratulations!",
+              "So happy to see you two starting this beautiful journey together. Best wishes!",
+              "May your love story be the most beautiful one ever told. Happy Wedding!",
+              "Wishing you joy, love and happiness on your wedding day and as you begin your new life together."
+            ],
+            poetic: [
+              "Two souls, one heart. May your journey be as magical as your love.",
+              "Like stars in the sky, may your love shine bright forever.",
+              "May the symphony of your love play on forever.",
+              "A new chapter, a new verse, written in the ink of love."
+            ],
+            joyful: [
+              "Cheers to the newlyweds! Let the party begin!",
+              "Here's to love, laughter, and happily ever after!",
+              "Congrats on tying the knot! Wishing you a fun-filled life together.",
+              "Woohoo! You guys did it! Wishing you the best adventure."
+            ],
+            religious: [
+              "MashaAllah, may Allah bless your union with love, mercy, and happiness.",
+              "May Allah grant you both a pious and happy life together.",
+              "Barakallahu lakuma. May Allah bless you both and gather you in goodness.",
+              "May your marriage be a means of growing closer to Allah."
+            ]
+          },
+          relative: {
+            heartfelt: [
+              "Welcome to the family, wishing you endless joy!",
+              "Seeing you two together brings so much joy to our family.",
+              "May your home be filled with laughter and love.",
+              "So proud of you both. Wishing you a wonderful marriage."
+            ],
+            poetic: [
+              "Family is the root, and your love is the beautiful flower.",
+              "May the roots of your family tree grow deep with love and respect.",
+              "Bound by blood, united by love. Wishing you eternity.",
+              "A beautiful addition to our family garden."
+            ],
+            joyful: [
+              "Finally! Now we have another reason to celebrate!",
+              "Welcome to the chaos! Wishing you lots of fun and love.",
+              "So happy to celebrate our favorite couple!",
+              "Let's eat, drink, and celebrate your love!"
+            ],
+            religious: [
+              "SubhanAllah, what a beautiful couple. May Allah protect you.",
+              "May your union be blessed with pious children and happiness.",
+              "Praying for your happiness in this world and the Hereafter.",
+              "May Allah shower His blessings upon this marriage."
+            ]
+          },
+          colleague: {
+            heartfelt: [
+               "Wishing you a wonderful wedding day and a great life ahead.",
+               "So happy for you! Wishing you balance and bliss.",
+               "Congratulations on your big day! Best wishes from the team.",
+               "Wishing you success in your marriage, just like in your career."
+            ],
+            poetic: [
+               "May your partnership be the greatest project of your lives.",
+               "Drafting a lifetime of happiness for you both.",
+               "May your love be the foundation of a beautiful future.",
+               "Calculating infinite happiness for you two."
+            ],
+            joyful: [
+               "Congrats! (Now get back to work... just kidding!) Enjoy your honeymoon!",
+               "Happy Wedding! Wishing you a stress-free and fun life.",
+               "Best wishes on your promotion to 'Spouse'!",
+               "Cheers to the happy couple!"
+            ],
+            religious: [
+               "May God bless your marriage with peace and prosperity.",
+               "Wishing you a blessed and harmonious union.",
+               "May your life together be filled with divine blessings.",
+               "Congratulations and prayers for your new journey."
+            ]
+          },
+          well_wisher: {
+            heartfelt: [
+              "Warmest congratulations to a very special couple.",
+              "Wishing you the best as you embark on this next chapter.",
+              "May your love grow stronger each and every passing year.",
+              "Thinking of you on this special day."
+            ],
+            poetic: [
+              "May the road ahead be filled with sunshine and flowers.",
+              "Wishing you a tapestry woven with threads of golden moments.",
+              "May your love be a beacon of light.",
+              "Sailing into the sunset of love together."
+            ],
+            joyful: [
+              "Happy Wedding Day! Have a blast!",
+              "Wishing you smiles, giggles, and hugs.",
+              "Here's to a long and happy life together.",
+              "Enjoy the ride! Congratulations."
+            ],
+            religious: [
+              "Sending you prayers for a blessed marriage.",
+              "May God's grace be upon you both always.",
+              "Wishing you a union filled with faith and love.",
+              "Blessings on your wedding day."
+            ]
+          }
+        };
+
+        const handleGenerate = () => {
+          setLoading(true);
+          // Simulate "thinking" delay for better UX
+          setTimeout(() => {
+            const category = wishDatabase[relation] || wishDatabase['well_wisher'];
+            const toneList = category[tone] || category['heartfelt'];
+            // Randomly select a wish
+            const randomWish = toneList[Math.floor(Math.random() * toneList.length)];
+            
+            setWish(randomWish);
+            setLoading(false);
+            setCopied(false);
+          }, 800);
+        };
+
+        const handleCopy = () => {
+          navigator.clipboard.writeText(wish);
+          setCopied(true);
+          setTimeout(() => setCopied(false), 2000);
+        };
+
+        const handleWhatsApp = () => {
+           const text = `Hey Lubna & Izaan! ${wish} - Sent via Wedding Invite App`;
+           window.open(`https://wa.me/917339902034?text=${encodeURIComponent(text)}`, '_blank');
+        };
+
+        const handleSMS = () => {
+           const text = `Hey Lubna & Izaan! ${wish}`;
+           window.open(`sms:+917339902034?body=${encodeURIComponent(text)}`, '_blank');
+        };
+
+        return (
+          <div className="bg-white/80 backdrop-blur-sm p-6 rounded-xl shadow-lg border border-amber-100 max-w-md mx-auto mt-12">
+            <h3 className="text-xl font-serif text-amber-800 mb-4 text-center">Write a Wish for the Couple</h3>
+            <p className="text-xs text-center text-gray-500 mb-4">Generate a beautiful message instantly.</p>
+            
+            <div className="grid grid-cols-2 gap-4 mb-4">
+              <div>
+                <label className="block text-xs font-semibold text-gray-600 mb-1 uppercase">You are a...</label>
+                <select 
+                  value={relation} 
+                  onChange={(e) => setRelation(e.target.value)}
+                  className="w-full p-2 border border-amber-200 rounded-md bg-stone-50 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500"
+                >
+                  <option value="friend">Friend</option>
+                  <option value="relative">Relative</option>
+                  <option value="colleague">Colleague</option>
+                  <option value="well_wisher">Well Wisher</option>
+                </select>
+              </div>
+              <div>
+                <label className="block text-xs font-semibold text-gray-600 mb-1 uppercase">Tone</label>
+                <select 
+                  value={tone} 
+                  onChange={(e) => setTone(e.target.value)}
+                  className="w-full p-2 border border-amber-200 rounded-md bg-stone-50 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500"
+                >
+                  <option value="heartfelt">Heartfelt</option>
+                  <option value="poetic">Poetic</option>
+                  <option value="joyful">Joyful</option>
+                  <option value="religious">Islamic/Religious</option>
+                </select>
+              </div>
+            </div>
+
+            <button 
+              onClick={handleGenerate} 
+              disabled={loading}
+              className="w-full bg-amber-700 text-white py-2 rounded-md hover:bg-amber-800 transition flex items-center justify-center gap-2 disabled:opacity-50 font-serif shadow-md"
+            >
+              {loading ? <span className="animate-spin">✦</span> : <Icons.Sparkles size={16} />}
+              {loading ? 'Crafting wish...' : 'Generate Wish'}
+            </button>
+
+            {wish && (
+              <div className="animate-fade-in">
+                <div className="mt-4 p-4 bg-amber-50 rounded-lg border border-amber-100 relative group">
+                  <p className="text-gray-700 italic font-serif text-center mb-2">"{wish}"</p>
+                  <button 
+                    onClick={handleCopy}
+                    className="absolute top-2 right-2 text-amber-600 hover:text-amber-800 p-1 rounded-full bg-white/50"
+                    title="Copy to clipboard"
+                  >
+                    {copied ? <Icons.Check size={14} /> : <Icons.Copy size={14} />}
+                  </button>
+                </div>
+                
+                <div className="mt-4 pt-4 border-t border-dashed border-amber-200">
+                   <p className="text-[10px] text-center text-gray-400 uppercase tracking-widest mb-2">Share to Lubna & Izaan</p>
+                   <div className="flex gap-2">
+                     <button 
+                       onClick={handleWhatsApp}
+                       className="flex-1 bg-green-600 hover:bg-green-700 text-white py-2 rounded-md transition text-xs flex items-center justify-center gap-2 shadow"
+                     >
+                        <Icons.MessageCircle size={14} /> WhatsApp
+                     </button>
+                     <button 
+                       onClick={handleSMS}
+                       className="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-md transition text-xs flex items-center justify-center gap-2 shadow"
+                     >
+                        <Icons.MessageSquare size={14} /> Text/SMS
+                     </button>
+                   </div>
+                </div>
+              </div>
+            )}
+          </div>
+        );
+      };
+
+      // --- Main App Component ---
+      const App = () => {
+        const [isPlaying, setIsPlaying] = useState(false);
+        
+        const toggleMusic = () => {
+          setIsPlaying(!isPlaying);
+          // In a real implementation, you would trigger audio.play() here
+        };
+
+        return (
+          <div className="min-h-screen bg-[#fcfaf8] text-stone-800 overflow-x-hidden selection:bg-amber-200">
+            
+            {/* Sticky Music Control */}
+            <div className="fixed bottom-6 right-6 z-50">
+              <button 
+                onClick={toggleMusic}
+                className="bg-amber-800 text-white p-3 rounded-full shadow-xl hover:bg-amber-900 transition-all duration-300 flex items-center gap-2"
+              >
+                {isPlaying ? <Icons.Volume2 size={20} /> : <Icons.VolumeX size={20} />}
+                <span className="text-xs font-semibold hidden md:inline">Melody</span>
+              </button>
+            </div>
+
+            {/* Hero Section */}
+            <section className="relative min-h-screen flex flex-col items-center justify-center p-6 text-center overflow-hidden">
+              <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1542038784456-1ea8e935640e?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80')] opacity-5 bg-cover bg-center" />
+              <FloralCorner className="absolute top-0 left-0 text-amber-500 w-32 h-32" />
+              <FloralCorner className="absolute top-0 right-0 rotate-90 text-amber-500 w-32 h-32" />
+              <FloralCorner className="absolute bottom-0 left-0 -rotate-90 text-amber-500 w-32 h-32" />
+              <FloralCorner className="absolute bottom-0 right-0 rotate-180 text-amber-500 w-32 h-32" />
+
+              <FadeIn delay={0.2} className="relative z-10">
+                <h2 className="text-amber-700 tracking-[0.3em] text-sm md:text-base font-bold uppercase mb-4">
+                  Glorious Moments
+                </h2>
+              </FadeIn>
+              
+              <FadeIn delay={0.4} className="relative z-10">
+                 <div className="w-64 h-64 md:w-80 md:h-80 mx-auto mb-8 rounded-full overflow-hidden border-4 border-amber-200 shadow-2xl p-1 bg-white">
+                   <img 
+                     src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                     alt="Couple Art" 
+                     className="w-full h-full object-cover rounded-full hover:scale-105 transition-transform duration-700"
+                   />
+                 </div>
+              </FadeIn>
+
+              <FadeIn delay={0.6} className="relative z-10">
+                <h1 className="font-script text-6xl md:text-8xl text-amber-800 mb-2">Lubna</h1>
+                <span className="font-serif text-2xl text-amber-600 italic">&</span>
+                <h1 className="font-script text-6xl md:text-8xl text-amber-800 mt-2 mb-6">Izaan</h1>
+              </FadeIn>
+
+              <FadeIn delay={0.8} className="relative z-10">
+                <p className="font-serif text-lg md:text-xl text-stone-600 italic">
+                  Are getting married
+                </p>
+                <Divider />
+                <p className="font-cinzel text-amber-900 font-bold text-xl md:text-2xl mt-2">
+                  January 10th, 2026
+                </p>
+                <p className="font-serif text-stone-500 mt-2">Kekri, Rajasthan</p>
+              </FadeIn>
+            </section>
+
+            {/* Invocation Section */}
+            <section className="py-20 px-6 bg-white relative">
+              <div className="max-w-3xl mx-auto text-center">
+                <FadeIn>
+                  <div className="w-16 h-16 mx-auto mb-6 text-amber-600">
+                     <Icons.Invocation />
+                  </div>
+                  <p className="font-serif text-amber-800 text-lg leading-relaxed italic mb-8">
+                    "In the name of ALLAH, the Most Beneficent & Merciful,<br/>
+                    with the grace of Huzoor Nabi-E-Karim (S.A.W.)<br/>
+                    and Able Baith Panjetan-E-Pak (A.S),<br/>
+                    and with the supreme blessing of Hazrat Khwaja Ghareeb Nawaz (R.A)."
+                  </p>
+                  
+                  <p className="text-stone-600 leading-relaxed font-light mb-8">
+                    <span className="font-bold text-amber-900 text-lg block mb-2">Haji Mohammad Hussain & Hajjan Jarina</span>
+                    request the pleasure of your gracious presence on the auspicious occasion of the wedding of their Grand Daughter
+                  </p>
+
+                  <div className="flex flex-col md:flex-row justify-center items-center gap-8 my-10">
+                    <div className="flex-1">
+                      <h3 className="font-script text-4xl text-amber-700 mb-2">Lubna Hussain</h3>
+                      <p className="text-sm text-stone-500 uppercase tracking-wide">D/o Mr. Ashfaq Hussain & Mrs. Nargis Hussain</p>
+                    </div>
+                    <div className="text-2xl text-amber-400 font-serif italic">with</div>
+                    <div className="flex-1">
+                      <h3 className="font-script text-4xl text-amber-700 mb-2">Mohammad Izaan</h3>
+                      <p className="text-sm text-stone-500 uppercase tracking-wide">Grand S/o Late Mr. Mushtaq Mohammad & Mrs. Raziya Begum</p>
+                      <p className="text-sm text-stone-500 uppercase tracking-wide">S/o Mr. Mehmood Riyaz & Mrs. Bilkiss</p>
+                    </div>
+                  </div>
+                </FadeIn>
+              </div>
+            </section>
+
+            {/* Events Timeline */}
+            <section className="py-20 px-4 bg-amber-50/50">
+              <div className="max-w-4xl mx-auto">
+                <FadeIn className="text-center mb-16">
+                  <h2 className="font-cinzel text-3xl md:text-4xl text-amber-900 mb-4">Wedding Itinerary</h2>
+                  <Divider />
+                </FadeIn>
+
+                <div className="relative border-l-2 border-amber-200 ml-4 md:ml-1/2 md:border-l-0">
+                   
+                   {/* Center Line for Desktop */}
+                   <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-0.5 bg-amber-200 -translate-x-1/2"></div>
+
+                   {/* Event 1 - Friday */}
+                   <div className="mb-16 md:flex md:justify-between items-center w-full">
+                      <div className="md:w-5/12 mb-8 md:mb-0 md:text-right pr-8 order-1">
+                         <FadeIn direction="right">
+                            <div className="inline-block bg-amber-100 text-amber-800 px-4 py-1 rounded-full text-sm font-bold mb-3">
+                              Friday, 9th January 2026
+                            </div>
+                            <h3 className="font-serif text-2xl text-stone-800 font-bold mb-2">Ceremonies of Joy</h3>
+                            <div className="space-y-4 text-stone-600">
+                              <div>
+                                 <p className="font-bold text-amber-700 flex items-center md:justify-end gap-2">
+                                   <span className="md:hidden"><Icons.Clock size={16}/></span> 2:30 PM
+                                 </p>
+                                 <p>Rasm E Haldi & Mehandi</p>
+                              </div>
+                              <div>
+                                 <p className="font-bold text-amber-700 flex items-center md:justify-end gap-2">
+                                   <span className="md:hidden"><Icons.Clock size={16}/></span> 4:30 PM
+                                 </p>
+                                 <p>Rasm E Gulposhi</p>
+                              </div>
+                              <div className="text-sm italic pt-2 flex items-center md:justify-end gap-2">
+                                <Icons.MapPin size={14} /> At Gopal Ji Ki Kothi, Kekri
+                              </div>
+                            </div>
+                         </FadeIn>
+                      </div>
+                      
+                      <div className="hidden md:flex order-2 w-8 h-8 bg-amber-500 rounded-full border-4 border-white shadow absolute left-1/2 -translate-x-1/2 z-10 items-center justify-center">
+                        <Icons.Heart size={14} className="text-white" />
+                      </div>
+
+                      <div className="md:w-5/12 pl-8 order-3 opacity-0 hidden md:block">Placeholder</div>
+                   </div>
+
+                   {/* Event 2 - Friday Evening */}
+                   <div className="mb-16 md:flex md:justify-between items-center w-full">
+                      <div className="md:w-5/12 mb-8 md:mb-0 md:text-right pr-8 order-1 hidden md:block opacity-0">Placeholder</div>
+                      
+                      <div className="hidden md:flex order-2 w-8 h-8 bg-amber-500 rounded-full border-4 border-white shadow absolute left-1/2 -translate-x-1/2 z-10 items-center justify-center">
+                        <Icons.Music size={14} className="text-white" />
+                      </div>
+
+                      <div className="md:w-5/12 pl-8 order-3">
+                         <FadeIn direction="left">
+                            <h3 className="font-serif text-2xl text-stone-800 font-bold mb-2">Evening of Celebration</h3>
+                            <div className="space-y-4 text-stone-600">
+                              <div>
+                                 <p className="font-bold text-amber-700 flex items-center gap-2">
+                                   <Icons.Clock size={16}/> 5:00 PM Onwards
+                                 </p>
+                                 <p>Dawat - E - Dinner</p>
+                              </div>
+                              <div>
+                                 <p className="font-bold text-amber-700 flex items-center gap-2">
+                                   <Icons.Clock size={16}/> 7:00 PM
+                                 </p>
+                                 <p>Mehfil E Rang E Raza</p>
+                              </div>
+                              <div className="text-sm italic pt-2 flex items-center gap-2">
+                                <Icons.MapPin size={14} /> Venue: Sugan Vatika, Kekri
+                              </div>
+                            </div>
+                         </FadeIn>
+                      </div>
+                   </div>
+
+                   {/* Event 3 - Saturday */}
+                   <div className="mb-16 md:flex md:justify-between items-center w-full">
+                      <div className="md:w-5/12 mb-8 md:mb-0 md:text-right pr-8 order-1">
+                         <FadeIn direction="right">
+                            <div className="inline-block bg-amber-800 text-white px-4 py-1 rounded-full text-sm font-bold mb-3">
+                              Saturday, 10th January 2026
+                            </div>
+                            <h3 className="font-serif text-2xl text-stone-800 font-bold mb-2">The Wedding Day</h3>
+                            <div className="space-y-4 text-stone-600">
+                              <div>
+                                 <p className="font-bold text-amber-700 flex items-center md:justify-end gap-2">
+                                   <span className="md:hidden"><Icons.Clock size={16}/></span> 2:30 PM
+                                 </p>
+                                 <p>Khushamdid - E - Barat</p>
+                              </div>
+                              <div>
+                                 <p className="font-bold text-amber-700 flex items-center md:justify-end gap-2">
+                                   <span className="md:hidden"><Icons.Clock size={16}/></span> After Namaz Zohar
+                                 </p>
+                                 <p className="font-script text-2xl text-amber-600">Al Nikah Min Sunnati</p>
+                              </div>
+                              <div className="text-sm italic pt-2 flex items-center md:justify-end gap-2">
+                                <Icons.MapPin size={14} /> Venue: Sugan Vatika, Kekri
+                              </div>
+                              <div className="text-xs text-stone-400 mt-2">
+                                Insha Allah "Al Nikah - Min Sunnati"<br/>
+                                Family Location: Khanpur - Jhalawar
+                              </div>
+                            </div>
+                         </FadeIn>
+                      </div>
+
+                      <div className="hidden md:flex order-2 w-8 h-8 bg-amber-800 rounded-full border-4 border-white shadow absolute left-1/2 -translate-x-1/2 z-10 items-center justify-center">
+                        <Icons.Calendar size={14} className="text-white" />
+                      </div>
+
+                      <div className="md:w-5/12 pl-8 order-3 opacity-0 hidden md:block">Placeholder</div>
+                   </div>
+                </div>
+              </div>
+            </section>
+            
+            {/* Interactive Feature: Wishes */}
+            <section className="py-20 px-6 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] bg-fixed relative">
+               <div className="absolute inset-0 bg-amber-900/5"></div>
+               <div className="max-w-4xl mx-auto relative z-10">
+                  <FadeIn>
+                    <h2 className="text-center font-cinzel text-3xl text-amber-800 mb-2">Send Your Blessings</h2>
+                    <p className="text-center text-stone-600 mb-8 font-serif">
+                      Join us in spirit and craft a beautiful message for the couple.
+                    </p>
+                    <WishGenerator />
+                  </FadeIn>
+               </div>
+            </section>
+
+            {/* Footer */}
+            <footer className="bg-stone-900 text-stone-300 py-12 px-6 text-center">
+              <FadeIn>
+                <h2 className="font-script text-5xl text-amber-500 mb-6">Thank You</h2>
+                <p className="max-w-xl mx-auto mb-8 font-light text-sm leading-loose">
+                  We look forward to celebrating this joyous occasion with you. Your presence means the world to us and adds to the happiness of this glorious day.
+                </p>
+                
+                <div className="flex justify-center gap-4 mb-8">
+                   <button className="bg-amber-700 hover:bg-amber-600 text-white px-6 py-2 rounded-full flex items-center gap-2 transition text-sm">
+                      <Icons.Share2 size={16} /> Share Invitation
+                   </button>
+                   <a href="https://maps.google.com/?q=Sugan+Vatika+Kekri" target="_blank" rel="noreferrer" className="bg-stone-800 hover:bg-stone-700 text-white px-6 py-2 rounded-full flex items-center gap-2 transition text-sm border border-stone-700">
+                      <Icons.MapPin size={16} /> Navigate
+                   </a>
+                </div>
+
+                <Divider className="opacity-20" />
+                
+                <p className="text-xs text-stone-500 uppercase tracking-widest mt-6">
+                  With Love & Joy from the Hussain & Riyaz Families
+                </p>
+              </FadeIn>
+            </footer>
+          </div>
+        );
+      };
+
+      const root = ReactDOM.createRoot(document.getElementById('root'));
+      root.render(<App />);
+    </script>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>
