@@ -62,7 +62,6 @@
   }
 }
 </script>
-<link rel="stylesheet" href="/index.css">
 </head>
   <body>
     <div id="root"></div>
@@ -304,14 +303,19 @@
           setTimeout(() => setCopied(false), 2000);
         };
 
+        // Fixed Sharing Logic: Explicitly use the generated wish text
         const handleWhatsApp = () => {
-           const text = `Hey Lubna & Izaan! ${wish} - Sent via Wedding Invite App`;
-           window.open(`https://wa.me/917339902034?text=${encodeURIComponent(text)}`, '_blank');
+           if (!wish) return;
+           const message = `Hey Lubna & Izaan! ${wish}`;
+           window.open(`https://wa.me/917339902034?text=${encodeURIComponent(message)}`, '_blank');
         };
 
         const handleSMS = () => {
-           const text = `Hey Lubna & Izaan! ${wish}`;
-           window.open(`sms:+917339902034?body=${encodeURIComponent(text)}`, '_blank');
+           if (!wish) return;
+           const message = `Hey Lubna & Izaan! ${wish}`;
+           // iOS uses '&' for body, Android '?', but standard is ?body=
+           // Trying a compatible format
+           window.open(`sms:+917339902034?body=${encodeURIComponent(message)}`, '_blank');
         };
 
         return (
@@ -371,7 +375,7 @@
                 </div>
                 
                 <div className="mt-4 pt-4 border-t border-dashed border-amber-200">
-                   <p className="text-[10px] text-center text-gray-400 uppercase tracking-widest mb-2">Share to Lubna & Izaan</p>
+                   <p className="text-[10px] text-center text-gray-400 uppercase tracking-widest mb-2">Share this wish to Lubna & Izaan</p>
                    <div className="flex gap-2">
                      <button 
                        onClick={handleWhatsApp}
@@ -396,20 +400,41 @@
       // --- Main App Component ---
       const App = () => {
         const [isPlaying, setIsPlaying] = useState(false);
+        const audioRef = useRef(null);
         
         const toggleMusic = () => {
-          setIsPlaying(!isPlaying);
-          // In a real implementation, you would trigger audio.play() here
+          if (audioRef.current) {
+            if (isPlaying) {
+              audioRef.current.pause();
+            } else {
+              // Handle autoplay restrictions
+              const playPromise = audioRef.current.play();
+              if (playPromise !== undefined) {
+                playPromise.catch(error => {
+                  console.log("Audio playback failed:", error);
+                });
+              }
+            }
+            setIsPlaying(!isPlaying);
+          }
         };
 
         return (
           <div className="min-h-screen bg-[#fcfaf8] text-stone-800 overflow-x-hidden selection:bg-amber-200">
             
+            {/* Audio Element (Hidden) */}
+            {/* Using Pachelbel's Canon - Public Domain / Creative Commons suitable for weddings */}
+            <audio 
+              ref={audioRef} 
+              loop 
+              src="https://upload.wikimedia.org/wikipedia/commons/transcoded/d/db/Pachelbel%27s_Canon.ogg/Pachelbel%27s_Canon.ogg.mp3"
+            />
+
             {/* Sticky Music Control */}
             <div className="fixed bottom-6 right-6 z-50">
               <button 
                 onClick={toggleMusic}
-                className="bg-amber-800 text-white p-3 rounded-full shadow-xl hover:bg-amber-900 transition-all duration-300 flex items-center gap-2"
+                className="bg-amber-800 text-white p-3 rounded-full shadow-xl hover:bg-amber-900 transition-all duration-300 flex items-center gap-2 animate-bounce-slow"
               >
                 {isPlaying ? <Icons.Volume2 size={20} /> : <Icons.VolumeX size={20} />}
                 <span className="text-xs font-semibold hidden md:inline">Melody</span>
@@ -660,6 +685,5 @@
       const root = ReactDOM.createRoot(document.getElementById('root'));
       root.render(<App />);
     </script>
-  <script type="module" src="/index.tsx"></script>
-</body>
+  </body>
 </html>
