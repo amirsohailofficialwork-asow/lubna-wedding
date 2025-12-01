@@ -5,7 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lubna Wedding Invitation</title>
     <style>
+/* --- ADVANCED GRADIENT ANIMATION LAYER SYSTEM --- */
+:root {
+    --wedding-gradient-gold: linear-gradient(120deg, #D4AF37 0%, #C9A961 60%, #A68450 100%);
+    --wedding-gradient-gold-soft: linear-gradient(135deg, #D4B896 0%, #C9A961 70%, #D4AF37 100%);
+    --wedding-gradient-blue: linear-gradient(130deg, #3498db 0%, #2980b9 100%);
+    --wedding-gradient-hero: linear-gradient(115deg, #D4AF37, #C9A961, #533483, #3498db, #9b59b6, #8e44ad);
+    --gradient-hero-text: linear-gradient(90deg, #D4AF37 5%, #C9A961 35%, #9b59b6 60%, #3498db 80%, #C9A961 95%);
+    --gradient-card-border: linear-gradient(110deg, #C9A961 10%, #9b59b6 50%, #D4B896 90%);
+    --gradient-card-bg: linear-gradient(125deg,#FFFBEA 0%, #9b59b6 30%, #D4AF37 100%);
+    --gradient-glow: radial-gradient(circle, rgba(201,169,97,0.3) 0%, rgba(83,52,131,0.12) 80%, transparent);
+    --gradient-btn: linear-gradient(110deg,#D4AF37 0%, #533483 52%, #FFC185 100%);
+    --gradient-btn-hover: linear-gradient(110deg,#FFC185,#DB4545,#D4AF37);
+    --gradient-divider: linear-gradient(270deg, #D4AF37 10%, #9b59b6 50%, #C9A961 90%);
+    --gradient-section: linear-gradient(135deg, #D4AF37, #8e44ad, #3498db, #C9A961);
+    --gradient-wishes-bg: linear-gradient(140deg,#D4AF37 10%, #FFC185 50%, #9b59b6 90%);
+}
+
+
         :root {
+  /* Dynamic gradient colors for scroll animation */
+  --gradient-color-1: #1a1a2e;
+  --gradient-color-2: #16213e;
+  --gradient-color-3: #0f3460;
+  --gradient-color-4: #533483;
+  
   /* Golden color for wedding theme - Glossy Rich Gold */
   --color-golden: #C9A961;
   --color-golden-dark: #A68450;
@@ -198,10 +222,79 @@ html {
 
 body {
     font-family: var(--font-family-base);
-    background-color: var(--color-background);
     color: var(--color-golden);
     line-height: var(--line-height-normal);
     overflow-x: hidden;
+    position: relative;
+    transition: background 0.3s ease-out;
+    min-height: 100vh;
+    /* Primary gradient animation layer */
+    background: var(--wedding-gradient-hero);
+    animation: body-gradient-scroll 18s ease-in-out infinite alternate;
+}
+/* Parallax gradient overlay: subtle fade with movement */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.38;
+    background: var(--gradient-glow);
+    animation: glowPulse 10s ease-in-out infinite alternate;
+}
+@keyframes body-gradient-scroll {
+    0% {
+        background-position: 0% 60%;
+        background-size: 150% 150%;
+        /* gold and purple */
+    }
+    40% {
+        background-position: 60% 80%;
+        background-size: 110% 110%;
+    }
+    70% {
+        background-position: 90% 30%;
+        background-size: 160% 120%;
+    }
+    100% {
+        background-position: 6% 84%;
+        background-size: 140% 150%;
+    }
+}
+@keyframes glowPulse {
+    0%,100% { opacity: 0.38; filter: blur(0.5px); }
+    50% { opacity: 0.54; filter: blur(2px); }
+}
+
+
+/* Full Page Background with Golden Lights */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('https://agi-prod-file-upload-public-main-use1.s3.amazonaws.com/81d0beaf-dcee-4769-8296-3ed2f13cffea');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    opacity: 0.28;
+    z-index: -2;
+}
+
+/* Dark Overlay for Text Readability */
+body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.65);
+    z-index: -1;
 }
 
 /* Navigation - Tabs Version */
@@ -299,7 +392,130 @@ body {
     border-radius: 2px;
 }
 
-/* Hero Section */
+/* --- Hero Section Gradient Animation --- */
+@keyframes heroGradientAnim {
+    0%,100% { background-position: 0% 60%; }
+    50% { background-position: 90% 40%; }
+}
+.hero {
+    margin-top: 50px;
+    min-height: 95vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-32) var(--space-16);
+    position: relative;
+    overflow: hidden;
+    /* Animated gradient background layer */
+    background: var(--wedding-gradient-hero);
+    background-size: 200% 200%;
+    animation: heroGradientAnim 14s ease-in-out infinite alternate;
+}
+.hero::after {
+    content: '';
+    position: absolute; left:0;top:0;right:0;bottom:0;
+    background: var(--gradient-glow);
+    pointer-events: none;
+    opacity: 0.24;
+    z-index: 0;
+    animation: glowPulse 7s ease-in-out infinite alternate;
+}
+.hero-content {
+    text-align: center;
+    max-width: 600px;
+    position: relative;
+    z-index: 1;
+    animation: fadeInUp 1s ease-out;
+}
+.arabic-blessing {
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-medium);
+    margin-bottom: var(--space-24);
+    letter-spacing: 1px;
+    animation: fadeInUp 1s ease-out both;
+    background: var(--gradient-divider);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.invitation-text {
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: var(--space-32);
+    letter-spacing: 0.5px;
+    line-height: 1.4;
+    animation: fadeInUp 1s ease-out 0.2s both;
+    background: var(--gradient-hero-text);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 2px 12px #D4AF3799, 0 4px 32px #9b59b6aa;
+}
+.bride-name,
+.groom-name {
+    font-size: 3rem;
+    font-weight: var(--font-weight-bold);
+    background: var(--gradient-hero-text);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 1px 4px #D4AF37cc,0 10px 32px #3498db55, 1px 2px 8px #FFC18599;
+    line-height: 1.2;
+    margin: 0;
+    animation: fadeInUp 1s ease-out 0.3s both;
+}
+.ampersand {
+    font-size: var(--font-size-3xl);
+    margin: var(--space-12) 0;
+    font-weight: var(--font-weight-normal);
+    animation: fadeInUp 1s ease-out 0.4s both;
+    background: var(--gradient-divider);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.getting-married {
+    font-size: var(--font-size-xl);
+    margin-bottom: var(--space-20);
+    font-weight: var(--font-weight-medium);
+    animation: fadeInUp 1s ease-out 0.5s both;
+    background: var(--gradient-hero-text);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.decorative-divider {
+    font-size: var(--font-size-2xl);
+    margin: var(--space-16) 0;
+    display: block;
+    animation: fadeInUp 1s ease-out 0.6s both;
+    background: var(--gradient-divider);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.wedding-date {
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-bold);
+    margin-bottom: var(--space-12);
+    animation: fadeInUp 1s ease-out 0.7s both;
+    background: var(--gradient-hero-text);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.wedding-location {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-medium);
+    padding: var(--space-12) var(--space-24);
+    background: var(--color-surface);
+    /* subtle animated gradient glow under location */
+    border-radius: var(--radius-full);
+    display: inline-block;
+    box-shadow: 0 4px 22px rgba(212,175,55,0.11) , 0 2px 16px #53348333,0 1px 8px #FFC18522;
+    border: 2px solid #D4AF37;
+    animation: fadeInUp 1s ease-out 0.8s both, locationGlow 7s ease-in-out infinite alternate;
+}
+@keyframes locationGlow {
+    0%,100% { box-shadow: 0 2px 24px #FFC18522, 0 8px 48px #C9A96122; }
+    50%      { box-shadow: 0 12px 72px #D4B89666, 0 2px 24px #53348344; }
+}
+
 @keyframes fadeInUp {
     from {
         opacity: 0;
@@ -326,7 +542,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, var(--color-bg-1) 0%, var(--color-bg-5) 50%, var(--color-bg-7) 100%);
+    background: transparent;
     padding: var(--space-32) var(--space-16);
     position: relative;
     overflow: hidden;
@@ -439,7 +655,7 @@ body {
 /* Family Details Section */
 .family-details-section {
     padding: var(--space-32) var(--space-24);
-    background: linear-gradient(135deg, var(--color-bg-3) 0%, var(--color-bg-1) 50%, var(--color-bg-5) 100%);
+    background: transparent;
     position: relative;
 }
 
@@ -585,11 +801,93 @@ body {
     z-index: 1;
 }
 
-/* Wedding Schedule Section */
+/* --- Schedule Section - DARK GRADIENT EVENT CARDS --- */
 .schedule-section {
     padding: var(--space-32) var(--space-24);
     max-width: var(--container-lg);
     margin: 0 auto;
+    position: relative;
+    background: transparent;
+    border-radius: var(--radius-lg);
+}
+
+.events-container {
+    display: grid;
+    gap: var(--space-24);
+    position: relative;
+    z-index: 2;
+}
+
+.event-card {
+    border-radius: var(--radius-lg);
+    padding: var(--space-24);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(201, 169, 97, 0.3);
+    transition: all var(--duration-normal) var(--ease-standard);
+    position: relative;
+    overflow: hidden;
+    background-color: #000000 !important;
+    background-image: none !important;
+}
+.event-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: var(--radius-lg);
+    z-index: 0;
+    background: #000000 !important;
+    opacity: 1;
+    pointer-events: none;
+}
+.event-card:hover {
+    transform: translateY(-4px) scale(1.025);
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.6), 0 0 40px rgba(212, 175, 55, 0.3);
+    border-color: #D4AF37;
+}
+.event-icon {
+    font-size: var(--font-size-3xl);
+    margin-bottom: var(--space-12);
+    display: block;
+    filter: drop-shadow(0 2px 4px rgba(212, 175, 55, 0.5));
+    position: relative;
+    z-index: 2;
+}
+.event-name {
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-bold);
+    margin-bottom: var(--space-12);
+    background: linear-gradient(90deg, #D4AF37 0%, #9b59b6 35%, #3498db 65%, #C9A961 100%) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    background-clip: text !important;
+    position: relative;
+    z-index: 2;
+    color: transparent !important;
+}
+.event-date, .event-time, .event-venue {
+    font-size: var(--font-size-md);
+    margin-bottom: var(--space-8);
+    background: linear-gradient(90deg, #D4AF37 0%, #9b59b6 35%, #3498db 65%, #C9A961 100%) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    background-clip: text !important;
+    position: relative;
+    z-index: 2;
+    color: transparent !important;
+}
+.event-time {
+    font-weight: var(--font-weight-bold);
+    background: linear-gradient(90deg, #D4AF37 0%, #9b59b6 35%, #3498db 65%, #C9A961 100%) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    background-clip: text !important;
+}
+.event-venue {
+    font-weight: var(--font-weight-medium);
+    background: linear-gradient(90deg, #D4AF37 0%, #9b59b6 35%, #3498db 65%, #C9A961 100%) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    background-clip: text !important;
 }
 
 .section-title {
@@ -607,6 +905,7 @@ body {
     font-weight: var(--font-weight-bold);
     position: relative;
     padding-bottom: var(--space-16);
+    z-index: 2;
 }
 
 .section-title::after {
@@ -624,39 +923,13 @@ body {
 .events-container {
     display: grid;
     gap: var(--space-24);
-}
-
-.event-card {
-    background: linear-gradient(135deg, var(--color-surface) 0%, var(--color-bg-1) 100%);
-    border: 1px solid var(--color-card-border);
-    border-radius: var(--radius-lg);
-    padding: var(--space-24);
-    box-shadow: var(--shadow-md);
-    transition: all var(--duration-normal) var(--ease-standard);
     position: relative;
-    overflow: hidden;
+    z-index: 2;
 }
 
-.event-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(var(--color-teal-500-rgb), 0.1), transparent);
-    transition: left 0.5s ease;
-}
 
-.event-card:hover::before {
-    left: 100%;
-}
 
-.event-card:hover {
-    transform: translateY(-8px) scale(1.02);
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
-    border-color: var(--color-primary);
-}
+/* Already handled - see .event-card:hover above for dark gradients */
 
 .event-icon {
     font-size: var(--font-size-3xl);
@@ -664,38 +937,127 @@ body {
     display: block;
 }
 
-.event-name {
-    font-size: var(--font-size-2xl);
-    font-weight: var(--font-weight-bold);
-    color: var(--color-golden);
-    margin-bottom: var(--space-12);
-    position: relative;
-    z-index: 1;
-}
+/* Overridden by .event-name above for dark/golden readable gradient text */
 
-.event-date {
-    font-size: var(--font-size-lg);
-    color: var(--color-golden);
-    margin-bottom: var(--space-8);
-    font-weight: var(--font-weight-medium);
-}
+/* Uses golden text styling above - event details on dark background */
 
-.event-time {
-    font-size: var(--font-size-md);
-    color: var(--color-golden);
-    margin-bottom: var(--space-8);
-}
-
-.event-venue {
-    font-size: var(--font-size-md);
-    color: var(--color-golden);
-    font-weight: var(--font-weight-medium);
-}
-
-/* Wishes Section */
+/* --- Wishes Section - Simple Styling (No Gradients) --- */
 .wishes-section {
     padding: var(--space-32) var(--space-24);
-    background: linear-gradient(135deg, var(--color-bg-2) 0%, var(--color-bg-6) 100%);
+    background: transparent;
+    position: relative;
+}
+.wishes-counter {
+    background: var(--color-surface);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--color-card-border);
+}
+.counter-number {
+    font-size: var(--font-size-4xl);
+    font-weight: var(--font-weight-bold);
+    background: linear-gradient(100deg, var(--color-golden) 0%, var(--color-golden-light) 35%, var(--color-golden-dark) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow:
+        0 1px 3px rgba(166, 132, 80, 0.18),
+        0 0.5px 0.5px #fff8e1,
+        1px 2px 4px rgba(201, 169, 97, 0.15);
+    margin-bottom: var(--space-8);
+    display: block;
+}
+.counter-label {
+    font-size: var(--font-size-lg);
+    color: var(--color-golden);
+    font-weight: var(--font-weight-medium);
+}
+.wishes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--space-20);
+    margin-top: var(--space-24);
+}
+.wish-card {
+    background: var(--color-surface);
+    padding: var(--space-24);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-card-border);
+    box-shadow: var(--shadow-md);
+    text-align: center;
+    transition: all var(--duration-normal) var(--ease-standard);
+    animation: slideIn 0.5s ease-out both;
+    position: relative;
+    overflow: hidden;
+}
+.wish-card::before {
+    content: '❤️';
+    position: absolute;
+    top: var(--space-12);
+    right: var(--space-12);
+    font-size: var(--font-size-lg);
+    opacity: 0.3;
+}
+.wish-card:hover {
+    transform: translateY(-4px) scale(1.03);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    border-color: var(--color-primary);
+}
+.wish-text {
+    font-size: var(--font-size-lg);
+    color: var(--color-golden);
+    font-style: italic;
+    line-height: 1.6;
+    margin-bottom: var(--space-16);
+}
+.share-whatsapp-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-8);
+    padding: var(--space-8) var(--space-16);
+    background-color: #25D366;
+    color: white;
+    border: none;
+    border-radius: var(--radius-base);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    cursor: pointer;
+    transition: all var(--duration-fast) var(--ease-standard);
+    text-decoration: none;
+}
+.share-whatsapp-btn:hover {
+    background-color: #20BA5A;
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+}
+.share-whatsapp-btn:active {
+    transform: scale(0.98);
+}
+.refresh-button {
+    display: block;
+    margin: var(--space-32) auto 0;
+    padding: var(--space-12) var(--space-24);
+    background: linear-gradient(135deg, var(--color-primary), var(--color-teal-700));
+    color: var(--color-btn-primary-text);
+    border: none;
+    border-radius: var(--radius-full);
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-medium);
+    cursor: pointer;
+    transition: all var(--duration-normal) var(--ease-standard);
+    box-shadow: var(--shadow-md);
+}
+.refresh-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(var(--color-teal-500-rgb), 0.3);
+}
+.refresh-button:active {
+    transform: translateY(0);
+}
+
+.wishes-section {
+    padding: var(--space-32) var(--space-24);
+    background: transparent;
     position: relative;
 }
 
@@ -999,22 +1361,29 @@ body {
         gap: var(--space-16);
     }
 
-    .schedule-section,
+    .schedule-section {
+        padding: var(--space-24) var(--space-16);
+    }
+    
+    body::before {
+        background-attachment: scroll;
+    }
+    
     .wishes-section {
         padding: var(--space-24) var(--space-16);
     }
 }
 
-/* Scroll to Top Button */
+/* Scroll to Top Button - Simple Golden (No Gradient) */
 #scrollToTop {
     position: fixed;
     bottom: 30px;
     right: 30px;
     width: 55px;
     height: 55px;
-    background: linear-gradient(135deg, var(--color-golden), var(--color-golden-dark));
-    color: var(--color-slate-900);
-    border: 2px solid var(--color-golden-light);
+    background: var(--color-golden);
+    color: white;
+    border: 2px solid var(--color-golden-dark);
     border-radius: 50%;
     font-size: var(--font-size-2xl);
     font-weight: var(--font-weight-bold);
@@ -1023,26 +1392,25 @@ body {
     visibility: hidden;
     transition: all var(--duration-normal) var(--ease-standard);
     z-index: 999;
-    box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
+    box-shadow: var(--shadow-md);
     display: flex;
     align-items: center;
     justify-content: center;
+    outline: none;
 }
-
 #scrollToTop.show {
     opacity: 1;
     visibility: visible;
 }
-
 #scrollToTop:hover {
     transform: translateY(-5px) scale(1.1);
-    box-shadow: 0 8px 20px rgba(212, 175, 55, 0.5);
-    background: linear-gradient(135deg, var(--color-golden-light), var(--color-golden));
+    background: var(--color-golden-light);
+    box-shadow: 0 8px 16px rgba(201, 169, 97, 0.3);
 }
-
 #scrollToTop:active {
     transform: translateY(-2px) scale(1.05);
 }
+
 
 @media (max-width: 480px) {
     .bride-name,
@@ -1233,6 +1601,8 @@ body {
     <button id="scrollToTop" onclick="scrollToTop()" title="Back to top">↑</button>
 
     <script>
+// --- ADVANCED GRADIENT ANIMATION LOGIC ---
+
         // Array of wishes
         const wishes = [
             "Wishing you a lifetime of love and happiness",
@@ -1373,6 +1743,33 @@ body {
         }
         // Generate wishes on page load
         generateRandomWishes();
+        
+        // Parallax and dynamic background gradient & section overlays
+function updateGradientOnScroll() {
+    const scrollPosition = window.scrollY;
+    const documentHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const scrollPercentage = Math.max(0, Math.min(1, scrollPosition / documentHeight));
+    // Sectional moving backgrounds:
+    document.body.style.background = `linear-gradient(135deg, rgba(212,175,55,${0.84-scrollPercentage*0.4}), rgb(${15 + 68*scrollPercentage}, ${52 + 81*scrollPercentage}, ${96 + 55*scrollPercentage}), rgb(${83},${52},${131}), rgb(${212},${175},${55},${0.54-scrollPercentage*0.38}))`;
+    // Optional: Animate remaining gradient sections
+    animateSectionGradients(scrollPercentage);
+}
+function animateSectionGradients(scrollPercentage) {
+    // Hero background parallax (keep gradient animation)
+    document.querySelector('.hero').style.backgroundPosition = `${scrollPercentage*80}% 40%`;
+}
+let scrollTimeout;
+window.addEventListener('scroll', function() {
+    if (scrollTimeout) window.cancelAnimationFrame(scrollTimeout);
+    scrollTimeout = window.requestAnimationFrame(function() {
+        updateGradientOnScroll();
+    });
+});
+// On-load and resize
+window.addEventListener('load', updateGradientOnScroll);
+window.addEventListener('resize', updateGradientOnScroll);
+updateGradientOnScroll();
+
     </script>
 </body>
 </html>
