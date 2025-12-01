@@ -1,689 +1,1378 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Lubna & Izaan | Glorious Moments</title>
-    
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&family=Great+Vibes&family=Lato:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
-    
-    <!-- React & ReactDOM -->
-    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-    
-    <!-- Babel for JSX -->
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lubna Wedding Invitation</title>
     <style>
-      body {
-        font-family: 'Lato', sans-serif;
-        background-color: #fcfaf8;
-        color: #444;
-      }
-      .font-script {
-        font-family: 'Great Vibes', cursive;
-      }
-      .font-serif {
-        font-family: 'Playfair Display', serif;
-      }
-      .font-cinzel {
-        font-family: 'Cinzel', serif;
-      }
-      /* Custom scrollbar */
-      ::-webkit-scrollbar {
-        width: 8px;
-      }
-      ::-webkit-scrollbar-track {
-        background: #f1f1f1;
-      }
-      ::-webkit-scrollbar-thumb {
-        background: #d4af37;
-        border-radius: 4px;
-      }
-      ::-webkit-scrollbar-thumb:hover {
-        background: #b59020;
-      }
-    </style>
-<script type="importmap">
-{
-  "imports": {
-    "react": "https://aistudiocdn.com/react@^19.2.0",
-    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
-    "react/": "https://aistudiocdn.com/react@^19.2.0/",
-    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.30.0",
-    "framer-motion": "https://aistudiocdn.com/framer-motion@^12.23.24",
-    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.555.0"
+        :root {
+  /* Golden color for wedding theme - Glossy Rich Gold */
+  --color-golden: #C9A961;
+  --color-golden-dark: #A68450;
+  --color-golden-light: #D4B896;
+  --color-white: rgba(255, 255, 255, 1);
+  --color-black: rgba(0, 0, 0, 1);
+  --color-cream-50: rgba(252, 252, 249, 1);
+  --color-cream-100: rgba(255, 255, 253, 1);
+  --color-gray-200: rgba(245, 245, 245, 1);
+  --color-gray-300: rgba(167, 169, 169, 1);
+  --color-gray-400: rgba(119, 124, 124, 1);
+  --color-slate-500: rgba(98, 108, 113, 1);
+  --color-brown-600: rgba(94, 82, 64, 1);
+  --color-charcoal-700: rgba(31, 33, 33, 1);
+  --color-charcoal-800: rgba(38, 40, 40, 1);
+  --color-slate-900: rgba(19, 52, 59, 1);
+  --color-teal-300: rgba(50, 184, 198, 1);
+  --color-teal-400: rgba(45, 166, 178, 1);
+  --color-teal-500: rgba(33, 128, 141, 1);
+  --color-teal-600: rgba(29, 116, 128, 1);
+  --color-teal-700: rgba(26, 104, 115, 1);
+  --color-teal-800: rgba(41, 150, 161, 1);
+  --color-red-400: rgba(255, 84, 89, 1);
+  --color-red-500: rgba(192, 21, 47, 1);
+  --color-orange-400: rgba(230, 129, 97, 1);
+  --color-orange-500: rgba(168, 75, 47, 1);
+
+  --color-brown-600-rgb: 94, 82, 64;
+  --color-teal-500-rgb: 33, 128, 141;
+  --color-slate-900-rgb: 19, 52, 59;
+  --color-slate-500-rgb: 98, 108, 113;
+  --color-red-500-rgb: 192, 21, 47;
+  --color-red-400-rgb: 255, 84, 89;
+  --color-orange-500-rgb: 168, 75, 47;
+  --color-orange-400-rgb: 230, 129, 97;
+
+  --color-bg-1: rgba(59, 130, 246, 0.08);
+  --color-bg-2: rgba(245, 158, 11, 0.08);
+  --color-bg-3: rgba(34, 197, 94, 0.08);
+  --color-bg-4: rgba(239, 68, 68, 0.08);
+  --color-bg-5: rgba(147, 51, 234, 0.08);
+  --color-bg-6: rgba(249, 115, 22, 0.08);
+  --color-bg-7: rgba(236, 72, 153, 0.08);
+  --color-bg-8: rgba(6, 182, 212, 0.08);
+
+  --color-background: var(--color-cream-50);
+  --color-surface: var(--color-cream-100);
+  --color-text: var(--color-slate-900);
+  --color-text-secondary: var(--color-slate-500);
+  --color-primary: var(--color-teal-500);
+  --color-primary-hover: var(--color-teal-600);
+  --color-primary-active: var(--color-teal-700);
+  --color-secondary: rgba(var(--color-brown-600-rgb), 0.12);
+  --color-secondary-hover: rgba(var(--color-brown-600-rgb), 0.2);
+  --color-secondary-active: rgba(var(--color-brown-600-rgb), 0.25);
+  --color-border: rgba(var(--color-brown-600-rgb), 0.2);
+  --color-btn-primary-text: var(--color-cream-50);
+  --color-card-border: rgba(var(--color-brown-600-rgb), 0.12);
+  --color-card-border-inner: rgba(var(--color-brown-600-rgb), 0.12);
+  --color-error: var(--color-red-500);
+  --color-success: var(--color-teal-500);
+  --color-warning: var(--color-orange-500);
+  --color-info: var(--color-slate-500);
+  --color-focus-ring: rgba(var(--color-teal-500-rgb), 0.4);
+  --color-select-caret: rgba(var(--color-slate-900-rgb), 0.8);
+
+  --focus-ring: 0 0 0 3px var(--color-focus-ring);
+  --focus-outline: 2px solid var(--color-primary);
+
+  --font-family-base: "FKGroteskNeue", "Geist", "Inter", -apple-system,
+    BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-family-mono: "Berkeley Mono", ui-monospace, SFMono-Regular, Menlo,
+    Monaco, Consolas, monospace;
+  --font-size-xs: 11px;
+  --font-size-sm: 12px;
+  --font-size-base: 14px;
+  --font-size-md: 14px;
+  --font-size-lg: 16px;
+  --font-size-xl: 18px;
+  --font-size-2xl: 20px;
+  --font-size-3xl: 24px;
+  --font-size-4xl: 30px;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 550;
+  --font-weight-bold: 600;
+  --line-height-tight: 1.2;
+  --line-height-normal: 1.5;
+  --letter-spacing-tight: -0.01em;
+
+  --space-0: 0;
+  --space-1: 1px;
+  --space-2: 2px;
+  --space-4: 4px;
+  --space-6: 6px;
+  --space-8: 8px;
+  --space-10: 10px;
+  --space-12: 12px;
+  --space-16: 16px;
+  --space-20: 20px;
+  --space-24: 24px;
+  --space-32: 32px;
+
+  --radius-sm: 6px;
+  --radius-base: 8px;
+  --radius-md: 10px;
+  --radius-lg: 12px;
+  --radius-full: 9999px;
+
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.02);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.04),
+    0 2px 4px -1px rgba(0, 0, 0, 0.02);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.04),
+    0 4px 6px -2px rgba(0, 0, 0, 0.02);
+  --shadow-inset-sm: inset 0 1px 0 rgba(255, 255, 255, 0.15),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.03);
+
+  --duration-fast: 150ms;
+  --duration-normal: 250ms;
+  --ease-standard: cubic-bezier(0.16, 1, 0.3, 1);
+
+  --container-sm: 640px;
+  --container-md: 768px;
+  --container-lg: 1024px;
+  --container-xl: 1280px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-gray-400-rgb: 119, 124, 124;
+    --color-teal-300-rgb: 50, 184, 198;
+    --color-gray-300-rgb: 167, 169, 169;
+    --color-gray-200-rgb: 245, 245, 245;
+
+    --color-bg-1: rgba(29, 78, 216, 0.15);
+    --color-bg-2: rgba(180, 83, 9, 0.15);
+    --color-bg-3: rgba(21, 128, 61, 0.15);
+    --color-bg-4: rgba(185, 28, 28, 0.15);
+    --color-bg-5: rgba(107, 33, 168, 0.15);
+    --color-bg-6: rgba(194, 65, 12, 0.15);
+    --color-bg-7: rgba(190, 24, 93, 0.15);
+    --color-bg-8: rgba(8, 145, 178, 0.15);
+
+    --color-background: var(--color-charcoal-700);
+    --color-surface: var(--color-charcoal-800);
+    --color-text: var(--color-gray-200);
+    --color-text-secondary: rgba(var(--color-gray-300-rgb), 0.7);
+    --color-primary: var(--color-teal-300);
+    --color-primary-hover: var(--color-teal-400);
+    --color-primary-active: var(--color-teal-800);
+    --color-secondary: rgba(var(--color-gray-400-rgb), 0.15);
+    --color-secondary-hover: rgba(var(--color-gray-400-rgb), 0.25);
+    --color-secondary-active: rgba(var(--color-gray-400-rgb), 0.3);
+    --color-border: rgba(var(--color-gray-400-rgb), 0.3);
+    --color-error: var(--color-red-400);
+    --color-success: var(--color-teal-300);
+    --color-warning: var(--color-orange-400);
+    --color-info: var(--color-gray-300);
+    --color-focus-ring: rgba(var(--color-teal-300-rgb), 0.4);
+    --color-btn-primary-text: var(--color-slate-900);
+    --color-card-border: rgba(var(--color-gray-400-rgb), 0.2);
+    --color-card-border-inner: rgba(var(--color-gray-400-rgb), 0.15);
+    --shadow-inset-sm: inset 0 1px 0 rgba(255, 255, 255, 0.1),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+    --color-select-caret: rgba(var(--color-gray-200-rgb), 0.8);
+
+    --color-success-rgb: var(--color-teal-300-rgb);
+    --color-error-rgb: var(--color-red-400-rgb);
+    --color-warning-rgb: var(--color-orange-400-rgb);
+    --color-info-rgb: var(--color-gray-300-rgb);
   }
 }
-</script>
+
+@font-face {
+  font-family: 'FKGroteskNeue';
+  src: url('https://r2cdn.perplexity.ai/fonts/FKGroteskNeue.woff2')
+    format('woff2');
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-family-base);
+    background-color: var(--color-background);
+    color: var(--color-golden);
+    line-height: var(--line-height-normal);
+    overflow-x: hidden;
+}
+
+/* Navigation - Tabs Version */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: linear-gradient(to right, var(--color-surface), var(--color-bg-5));
+    backdrop-filter: blur(10px);
+    box-shadow: var(--shadow-md);
+    z-index: 1000;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.nav-container {
+    max-width: var(--container-xl);
+    margin: 0 auto;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.nav-logo {
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-semibold);
+    background: linear-gradient(100deg, var(--color-golden) 0%, var(--color-golden-light) 35%, var(--color-golden-dark) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow:
+        0 1px 3px rgba(166, 132, 80, 0.18),
+        0 0.5px 0.5px #fff8e1,
+        1px 2px 4px rgba(201, 169, 97, 0.15);
+    letter-spacing: 0.3px;
+    padding: var(--space-12) var(--space-16);
+    text-align: center;
+    line-height: 1.3;
+}
+
+.nav-menu {
+    display: flex;
+    gap: 0;
+    list-style: none;
+    width: 100%;
+    justify-content: center;
+    border-top: 1px solid var(--color-border);
+}
+
+.nav-menu li {
+    flex: 1;
+    max-width: 200px;
+}
+
+.nav-link {
+    color: var(--color-golden);
+    text-decoration: none;
+    font-weight: var(--font-weight-medium);
+    font-size: var(--font-size-sm);
+    transition: all var(--duration-fast) var(--ease-standard);
+    cursor: pointer;
+    padding: var(--space-12) var(--space-16);
+    display: block;
+    text-align: center;
+    border-bottom: 3px solid transparent;
+    position: relative;
+}
+
+.nav-link:hover {
+    color: var(--color-golden);
+    background: var(--color-bg-1);
+}
+
+.nav-link.active {
+    color: var(--color-golden);
+    border-bottom-color: var(--color-golden);
+    background: var(--color-bg-1);
+}
+
+.hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 4px;
+    position: absolute;
+    right: var(--space-16);
+    top: var(--space-12);
+}
+
+.hamburger span {
+    width: 24px;
+    height: 2px;
+    background-color: var(--color-text);
+    transition: all var(--duration-fast) var(--ease-standard);
+    border-radius: 2px;
+}
+
+/* Hero Section */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+.hero {
+    margin-top: 50px;
+    min-height: 95vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--color-bg-1) 0%, var(--color-bg-5) 50%, var(--color-bg-7) 100%);
+    padding: var(--space-32) var(--space-16);
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(var(--color-teal-500-rgb), 0.1) 0%, transparent 70%);
+    animation: pulse 8s ease-in-out infinite;
+}
+
+.hero-content {
+    text-align: center;
+    max-width: 600px;
+    position: relative;
+    z-index: 1;
+    animation: fadeInUp 1s ease-out;
+}
+
+.arabic-blessing {
+    font-size: var(--font-size-2xl);
+    color: var(--color-golden);
+    font-weight: var(--font-weight-medium);
+    margin-bottom: var(--space-24);
+    letter-spacing: 1px;
+    animation: fadeInUp 1s ease-out both;
+}
+
+.invitation-text {
+    font-size: var(--font-size-2xl);
+    color: var(--color-golden);
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: var(--space-32);
+    letter-spacing: 0.5px;
+    line-height: 1.4;
+    animation: fadeInUp 1s ease-out 0.2s both;
+}
+
+.couple-names {
+    margin-bottom: var(--space-24);
+}
+
+.bride-name,
+.groom-name {
+    font-size: 3rem;
+    font-weight: var(--font-weight-bold);
+    background: linear-gradient(100deg, var(--color-golden) 0%, var(--color-golden-light) 35%, var(--color-golden-dark) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow:
+        0 1px 3px rgba(166, 132, 80, 0.18),
+        0 0.5px 0.5px #fff8e1,
+        1px 2px 4px rgba(201, 169, 97, 0.15);
+    line-height: 1.2;
+    margin: 0;
+    animation: fadeInUp 1s ease-out 0.3s both;
+}
+
+.ampersand {
+    font-size: var(--font-size-3xl);
+    color: var(--color-golden);
+    margin: var(--space-12) 0;
+    font-weight: var(--font-weight-normal);
+    animation: fadeInUp 1s ease-out 0.4s both;
+}
+
+.getting-married {
+    font-size: var(--font-size-xl);
+    color: var(--color-golden);
+    margin-bottom: var(--space-20);
+    font-weight: var(--font-weight-medium);
+    animation: fadeInUp 1s ease-out 0.5s both;
+}
+
+.decorative-divider {
+    font-size: var(--font-size-2xl);
+    color: var(--color-golden);
+    margin: var(--space-16) 0;
+    display: block;
+    animation: fadeInUp 1s ease-out 0.6s both;
+}
+
+.wedding-date {
+    font-size: var(--font-size-2xl);
+    color: var(--color-golden);
+    font-weight: var(--font-weight-bold);
+    margin-bottom: var(--space-12);
+    animation: fadeInUp 1s ease-out 0.7s both;
+}
+
+.wedding-location {
+    font-size: var(--font-size-xl);
+    color: var(--color-golden);
+    font-weight: var(--font-weight-medium);
+    padding: var(--space-12) var(--space-24);
+    background: var(--color-surface);
+    border-radius: var(--radius-full);
+    display: inline-block;
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--color-card-border);
+    animation: fadeInUp 1s ease-out 0.8s both;
+}
+
+/* Family Details Section */
+.family-details-section {
+    padding: var(--space-32) var(--space-24);
+    background: linear-gradient(135deg, var(--color-bg-3) 0%, var(--color-bg-1) 50%, var(--color-bg-5) 100%);
+    position: relative;
+}
+
+.family-container {
+    max-width: var(--container-md);
+    margin: 0 auto;
+}
+
+.family-content {
+    background: var(--color-surface);
+    border-radius: var(--radius-lg);
+    padding: var(--space-32);
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--color-card-border);
+    margin-bottom: var(--space-32);
+    position: relative;
+    overflow: hidden;
+}
+
+.family-content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--color-primary), var(--color-teal-700), var(--color-primary));
+}
+
+.bride-section,
+.groom-section {
+    text-align: center;
+    padding: var(--space-24) var(--space-16);
+    transition: all var(--duration-normal) var(--ease-standard);
+}
+
+.bride-section {
+    background: linear-gradient(135deg, var(--color-bg-7) 0%, transparent 100%);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--space-16);
+}
+
+.groom-section {
+    background: linear-gradient(135deg, var(--color-bg-1) 0%, transparent 100%);
+    border-radius: var(--radius-md);
+}
+
+.person-name {
+    font-size: var(--font-size-3xl);
+    font-weight: var(--font-weight-bold);
+    background: linear-gradient(100deg, var(--color-golden) 0%, var(--color-golden-light) 35%, var(--color-golden-dark) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow:
+        0 1px 3px rgba(166, 132, 80, 0.18),
+        0 0.5px 0.5px #fff8e1,
+        1px 2px 4px rgba(201, 169, 97, 0.15);
+    margin-bottom: var(--space-12);
+    letter-spacing: 0.5px;
+}
+
+.person-details {
+    font-size: var(--font-size-md);
+    color: var(--color-golden);
+    margin: var(--space-8) 0;
+    line-height: 1.6;
+    font-weight: var(--font-weight-medium);
+}
+
+.weds-divider {
+    text-align: center;
+    position: relative;
+    margin: var(--space-24) 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.weds-divider::before,
+.weds-divider::after {
+    content: '';
+    flex: 1;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--color-primary), transparent);
+    margin: 0 var(--space-16);
+}
+
+.weds-text {
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-golden);
+    padding: var(--space-8) var(--space-24);
+    background: var(--color-surface);
+    border: 2px solid var(--color-golden);
+    border-radius: var(--radius-full);
+    box-shadow: var(--shadow-md);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    position: relative;
+    z-index: 1;
+}
+
+.formal-invitation {
+    background: linear-gradient(135deg, var(--color-bg-2) 0%, var(--color-bg-6) 100%);
+    border-radius: var(--radius-lg);
+    padding: var(--space-32);
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--color-card-border);
+    text-align: center;
+    position: relative;
+}
+
+.formal-invitation::before {
+    content: '✦';
+    position: absolute;
+    top: var(--space-16);
+    left: var(--space-16);
+    font-size: var(--font-size-2xl);
+    color: var(--color-primary);
+    opacity: 0.3;
+}
+
+.formal-invitation::after {
+    content: '✦';
+    position: absolute;
+    bottom: var(--space-16);
+    right: var(--space-16);
+    font-size: var(--font-size-2xl);
+    color: var(--color-primary);
+    opacity: 0.3;
+}
+
+.invitation-message {
+    font-size: var(--font-size-lg);
+    color: var(--color-golden);
+    line-height: 1.8;
+    font-style: italic;
+    font-weight: var(--font-weight-medium);
+    max-width: 700px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+
+/* Wedding Schedule Section */
+.schedule-section {
+    padding: var(--space-32) var(--space-24);
+    max-width: var(--container-lg);
+    margin: 0 auto;
+}
+
+.section-title {
+    text-align: center;
+    font-size: var(--font-size-3xl);
+    margin-bottom: var(--space-32);
+    background: linear-gradient(100deg, var(--color-golden) 0%, var(--color-golden-light) 35%, var(--color-golden-dark) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow:
+        0 1px 3px rgba(166, 132, 80, 0.18),
+        0 0.5px 0.5px #fff8e1,
+        1px 2px 4px rgba(201, 169, 97, 0.15);
+    font-weight: var(--font-weight-bold);
+    position: relative;
+    padding-bottom: var(--space-16);
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--color-primary), transparent);
+    border-radius: var(--radius-full);
+}
+
+.events-container {
+    display: grid;
+    gap: var(--space-24);
+}
+
+.event-card {
+    background: linear-gradient(135deg, var(--color-surface) 0%, var(--color-bg-1) 100%);
+    border: 1px solid var(--color-card-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-24);
+    box-shadow: var(--shadow-md);
+    transition: all var(--duration-normal) var(--ease-standard);
+    position: relative;
+    overflow: hidden;
+}
+
+.event-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(var(--color-teal-500-rgb), 0.1), transparent);
+    transition: left 0.5s ease;
+}
+
+.event-card:hover::before {
+    left: 100%;
+}
+
+.event-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+    border-color: var(--color-primary);
+}
+
+.event-icon {
+    font-size: var(--font-size-3xl);
+    margin-bottom: var(--space-12);
+    display: block;
+}
+
+.event-name {
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-golden);
+    margin-bottom: var(--space-12);
+    position: relative;
+    z-index: 1;
+}
+
+.event-date {
+    font-size: var(--font-size-lg);
+    color: var(--color-golden);
+    margin-bottom: var(--space-8);
+    font-weight: var(--font-weight-medium);
+}
+
+.event-time {
+    font-size: var(--font-size-md);
+    color: var(--color-golden);
+    margin-bottom: var(--space-8);
+}
+
+.event-venue {
+    font-size: var(--font-size-md);
+    color: var(--color-golden);
+    font-weight: var(--font-weight-medium);
+}
+
+/* Wishes Section */
+.wishes-section {
+    padding: var(--space-32) var(--space-24);
+    background: linear-gradient(135deg, var(--color-bg-2) 0%, var(--color-bg-6) 100%);
+    position: relative;
+}
+
+.wishes-container {
+    max-width: var(--container-md);
+    margin: 0 auto;
+}
+
+.wishes-counter {
+    text-align: center;
+    margin: var(--space-24) 0;
+    padding: var(--space-16);
+    background: var(--color-surface);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--color-card-border);
+}
+
+.counter-number {
+    font-size: var(--font-size-4xl);
+    font-weight: var(--font-weight-bold);
+    background: linear-gradient(100deg, var(--color-golden) 0%, var(--color-golden-light) 35%, var(--color-golden-dark) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow:
+        0 1px 3px rgba(166, 132, 80, 0.18),
+        0 0.5px 0.5px #fff8e1,
+        1px 2px 4px rgba(201, 169, 97, 0.15);
+    display: block;
+    margin-bottom: var(--space-8);
+}
+
+.counter-label {
+    font-size: var(--font-size-lg);
+    color: var(--color-golden);
+    font-weight: var(--font-weight-medium);
+}
+
+.wishes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--space-20);
+    margin-top: var(--space-24);
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.wish-card {
+    background: var(--color-surface);
+    padding: var(--space-24);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-card-border);
+    box-shadow: var(--shadow-md);
+    text-align: center;
+    transition: all var(--duration-normal) var(--ease-standard);
+    animation: slideIn 0.5s ease-out both;
+    position: relative;
+    overflow: hidden;
+}
+
+.wish-card::before {
+    content: '❤️';
+    position: absolute;
+    top: var(--space-12);
+    right: var(--space-12);
+    font-size: var(--font-size-lg);
+    opacity: 0.3;
+}
+
+.wish-card:hover {
+    transform: translateY(-4px) scale(1.03);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    border-color: var(--color-primary);
+}
+
+.wish-text {
+    font-size: var(--font-size-lg);
+    color: var(--color-golden);
+    font-style: italic;
+    line-height: 1.6;
+    margin-bottom: var(--space-16);
+}
+
+.share-whatsapp-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-8);
+    padding: var(--space-8) var(--space-16);
+    background-color: #25D366;
+    color: white;
+    border: none;
+    border-radius: var(--radius-base);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    cursor: pointer;
+    transition: all var(--duration-fast) var(--ease-standard);
+    text-decoration: none;
+}
+
+.share-whatsapp-btn:hover {
+    background-color: #20BA5A;
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+}
+
+.share-whatsapp-btn:active {
+    transform: scale(0.98);
+}
+
+.refresh-button {
+    display: block;
+    margin: var(--space-32) auto 0;
+    padding: var(--space-12) var(--space-24);
+    background: linear-gradient(135deg, var(--color-primary), var(--color-teal-700));
+    color: var(--color-btn-primary-text);
+    border: none;
+    border-radius: var(--radius-full);
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-medium);
+    cursor: pointer;
+    transition: all var(--duration-normal) var(--ease-standard);
+    box-shadow: var(--shadow-md);
+}
+
+.refresh-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(var(--color-teal-500-rgb), 0.3);
+}
+
+.refresh-button:active {
+    transform: translateY(0);
+}
+
+/* Footer */
+.footer {
+    background-color: var(--color-surface);
+    padding: var(--space-24);
+    text-align: center;
+    border-top: 1px solid var(--color-border);
+}
+
+.footer-text {
+    color: var(--color-golden);
+    font-size: var(--font-size-sm);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .nav-container {
+        position: relative;
+    }
+
+    .nav-logo {
+        font-size: var(--font-size-sm);
+        padding: var(--space-10) var(--space-12);
+        line-height: 1.3;
+    }
+
+    .nav-menu {
+        display: flex;
+        flex-direction: row;
+        gap: 0;
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        border-top: 1px solid var(--color-border);
+    }
+
+    .nav-menu::-webkit-scrollbar {
+        display: none;
+    }
+
+    .nav-menu li {
+        flex-shrink: 0;
+        min-width: fit-content;
+    }
+
+    .nav-link {
+        padding: var(--space-12) var(--space-16);
+        font-size: var(--font-size-sm);
+        border-bottom: 3px solid transparent;
+        white-space: nowrap;
+    }
+
+    .nav-link.active {
+        border-bottom-color: var(--color-golden);
+    }
+
+    #scrollToTop {
+        width: 45px;
+        height: 45px;
+        font-size: var(--font-size-xl);
+    }
+
+    .hamburger {
+        display: none;
+    }
+
+    .hero {
+        margin-top: 50px;
+        padding: var(--space-24) var(--space-16);
+        min-height: 90vh;
+    }
+
+    .arabic-blessing {
+        font-size: var(--font-size-xl);
+    }
+
+    .invitation-text {
+        font-size: var(--font-size-xl);
+        margin-bottom: var(--space-24);
+    }
+
+    .bride-name,
+    .groom-name {
+        font-size: 2rem;
+    }
+
+    .family-details-section {
+        padding: var(--space-24) var(--space-16);
+    }
+
+    .family-content {
+        padding: var(--space-24) var(--space-16);
+    }
+
+    .person-name {
+        font-size: var(--font-size-2xl);
+    }
+
+    .person-details {
+        font-size: var(--font-size-sm);
+    }
+
+    .weds-text {
+        font-size: var(--font-size-xl);
+        padding: var(--space-6) var(--space-20);
+        letter-spacing: 1.5px;
+    }
+
+    .weds-divider::before,
+    .weds-divider::after {
+        margin: 0 var(--space-12);
+    }
+
+    .formal-invitation {
+        padding: var(--space-24) var(--space-16);
+    }
+
+    .invitation-message {
+        font-size: var(--font-size-md);
+        line-height: 1.7;
+    }
+
+    .ampersand {
+        font-size: var(--font-size-2xl);
+    }
+
+    .getting-married {
+        font-size: var(--font-size-lg);
+    }
+
+    .wedding-date {
+        font-size: var(--font-size-xl);
+    }
+
+    .wedding-location {
+        font-size: var(--font-size-md);
+        padding: var(--space-10) var(--space-20);
+    }
+
+    .decorative-divider {
+        font-size: var(--font-size-xl);
+    }
+    
+    .section-title {
+        font-size: var(--font-size-2xl);
+    }
+
+    .event-card {
+        padding: var(--space-20);
+    }
+
+    .event-name {
+        font-size: var(--font-size-xl);
+    }
+    
+    .wishes-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-16);
+    }
+
+    .schedule-section,
+    .wishes-section {
+        padding: var(--space-24) var(--space-16);
+    }
+}
+
+/* Scroll to Top Button */
+#scrollToTop {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 55px;
+    height: 55px;
+    background: linear-gradient(135deg, var(--color-golden), var(--color-golden-dark));
+    color: var(--color-slate-900);
+    border: 2px solid var(--color-golden-light);
+    border-radius: 50%;
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-bold);
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transition: all var(--duration-normal) var(--ease-standard);
+    z-index: 999;
+    box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#scrollToTop.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+#scrollToTop:hover {
+    transform: translateY(-5px) scale(1.1);
+    box-shadow: 0 8px 20px rgba(212, 175, 55, 0.5);
+    background: linear-gradient(135deg, var(--color-golden-light), var(--color-golden));
+}
+
+#scrollToTop:active {
+    transform: translateY(-2px) scale(1.05);
+}
+
+@media (max-width: 480px) {
+    .bride-name,
+    .groom-name {
+        font-size: 1.75rem;
+    }
+
+    .arabic-blessing {
+        font-size: var(--font-size-lg);
+    }
+
+    .invitation-text {
+        font-size: var(--font-size-lg);
+        margin-bottom: var(--space-20);
+    }
+
+    .person-name {
+        font-size: var(--font-size-xl);
+    }
+
+    .person-details {
+        font-size: var(--font-size-xs);
+    }
+
+    .weds-text {
+        font-size: var(--font-size-lg);
+        padding: var(--space-6) var(--space-16);
+        letter-spacing: 1px;
+    }
+
+    .invitation-message {
+        font-size: var(--font-size-sm);
+    }
+
+    .counter-number {
+        font-size: var(--font-size-3xl);
+    }
+}
+    </style>
 </head>
-  <body>
-    <div id="root"></div>
-
-    <script type="text/babel">
-      const { useState, useEffect, useRef } = React;
-
-      // --- Icons (Inline SVGs) ---
-      const Icon = ({ path, size = 16, className = "" }) => (
-        <svg 
-          xmlns="http://www.w3.org/2000/svg" 
-          width={size} 
-          height={size} 
-          viewBox="0 0 24 24" 
-          fill="none" 
-          stroke="currentColor" 
-          strokeWidth="2" 
-          strokeLinecap="round" 
-          strokeLinejoin="round" 
-          className={className}
-        >
-          {path}
-        </svg>
-      );
-
-      const Icons = {
-        Calendar: (props) => <Icon {...props} path={<><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></>} />,
-        MapPin: (props) => <Icon {...props} path={<><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></>} />,
-        Heart: (props) => <Icon {...props} path={<path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>} />,
-        Clock: (props) => <Icon {...props} path={<><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></>} />,
-        Music: (props) => <Icon {...props} path={<><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></>} />,
-        Volume2: (props) => <Icon {...props} path={<><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></>} />,
-        VolumeX: (props) => <Icon {...props} path={<><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></>} />,
-        Share2: (props) => <Icon {...props} path={<><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></>} />,
-        Sparkles: (props) => <Icon {...props} path={<><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"></path><path d="M5 3v4"></path><path d="M9 5h-4"></path><path d="M6 17v4"></path><path d="M8 19h-4"></path></>} />,
-        Copy: (props) => <Icon {...props} path={<><rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></>} />,
-        Check: (props) => <Icon {...props} path={<polyline points="20 6 9 17 4 12"></polyline>} />,
-        MessageCircle: (props) => <Icon {...props} path={<><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></>} />,
-        MessageSquare: (props) => <Icon {...props} path={<><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></>} />,
-        Invocation: (props) => (
-           <svg viewBox="0 0 24 24" fill="currentColor" width={props.size || 24} height={props.size || 24} className={props.className}>
-             <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
-           </svg>
-        )
-      };
-
-      // --- Components/Ornament ---
-      const Divider = ({ className }) => (
-        <div className={`flex items-center justify-center space-x-4 my-6 opacity-60 ${className}`}>
-          <div className="h-[1px] w-16 bg-amber-600"></div>
-          <div className="text-amber-700 text-xl">❦</div>
-          <div className="h-[1px] w-16 bg-amber-600"></div>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">You Are Invited in Lubna Hussain Wedding</div>
+            <div class="hamburger" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#home" class="nav-link" onclick="closeMenu()">Intro</a></li>
+                <li><a href="#schedule" class="nav-link" onclick="closeMenu()">Wedding Schedule</a></li>
+                <li><a href="#wishes" class="nav-link" onclick="closeMenu()">Wishes</a></li>
+            </ul>
         </div>
-      );
+    </nav>
 
-      const FloralCorner = ({ className, rotation = 0 }) => (
-        <svg 
-          className={className} 
-          style={{ transform: `rotate(${rotation}deg)` }}
-          width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg"
-        >
-          <path d="M0 0C50 0 100 50 100 100V0H0Z" fill="#d4af37" fillOpacity="0.2"/>
-        </svg>
-      );
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <div class="arabic-blessing">بِسْمِ اللَّـهِ الرَّحْمَـٰنِ الرَّحِيمِ</div>
+            <div class="invitation-text">You Are Invited in Lubna Hussain Wedding</div>
+            <div class="couple-names">
+                <h1 class="bride-name">Lubna</h1>
+                <div class="ampersand">&amp;</div>
+                <h1 class="groom-name">Izaan</h1>
+            </div>
+            <p class="getting-married">Are getting married</p>
+            <span class="decorative-divider">✦</span>
+            <div class="wedding-date">January 10th, 2026</div>
+            <div class="wedding-location">Kekri, Rajasthan</div>
+        </div>
+    </section>
 
-      // --- Components/FadeIn (Custom Implementation without Framer Motion) ---
-      const FadeIn = ({ children, delay = 0, direction = 'up', className = '' }) => {
-        const [isVisible, setIsVisible] = useState(false);
-        const ref = useRef(null);
+    <!-- Family Details Section -->
+    <section class="family-details-section">
+        <div class="family-container">
+            <div class="family-content">
+                <!-- Bride Section -->
+                <div class="bride-section">
+                    <h3 class="person-name">Lubna Hussain</h3>
+                    <p class="person-details">D/o Mr. Ashfaq Hussain &amp; Mrs. Nargis Hussain</p>
+                </div>
 
-        useEffect(() => {
-          const observer = new IntersectionObserver(([entry]) => {
-            if (entry.isIntersecting) {
-              setIsVisible(true);
-              observer.disconnect();
-            }
-          }, { threshold: 0.1 });
-          
-          if (ref.current) observer.observe(ref.current);
-          return () => observer.disconnect();
-        }, []);
+                <!-- Decorative Divider -->
+                <div class="weds-divider">
+                    <span class="weds-text">Weds</span>
+                </div>
 
-        const getDirectionClass = () => {
-          if (isVisible) return 'translate-x-0 translate-y-0 opacity-100';
-          switch(direction) {
-            case 'up': return 'translate-y-10 opacity-0';
-            case 'down': return '-translate-y-10 opacity-0';
-            case 'left': return '-translate-x-10 opacity-0';
-            case 'right': return 'translate-x-10 opacity-0';
-            default: return 'opacity-0';
-          }
-        };
-
-        return (
-          <div 
-            ref={ref}
-            className={`transition-all duration-1000 ease-out ${getDirectionClass()} ${className}`}
-            style={{ transitionDelay: `${delay}s` }}
-          >
-            {children}
-          </div>
-        );
-      };
-
-      // --- Components/WishGenerator (Offline Version) ---
-      const WishGenerator = () => {
-        const [relation, setRelation] = useState('friend');
-        const [tone, setTone] = useState('heartfelt');
-        const [wish, setWish] = useState('');
-        const [loading, setLoading] = useState(false);
-        const [copied, setCopied] = useState(false);
-
-        // Offline Database of Wishes
-        const wishDatabase = {
-          friend: {
-            heartfelt: [
-              "Wishing you both a lifetime of happiness and love. Congratulations!",
-              "So happy to see you two starting this beautiful journey together. Best wishes!",
-              "May your love story be the most beautiful one ever told. Happy Wedding!",
-              "Wishing you joy, love and happiness on your wedding day and as you begin your new life together."
-            ],
-            poetic: [
-              "Two souls, one heart. May your journey be as magical as your love.",
-              "Like stars in the sky, may your love shine bright forever.",
-              "May the symphony of your love play on forever.",
-              "A new chapter, a new verse, written in the ink of love."
-            ],
-            joyful: [
-              "Cheers to the newlyweds! Let the party begin!",
-              "Here's to love, laughter, and happily ever after!",
-              "Congrats on tying the knot! Wishing you a fun-filled life together.",
-              "Woohoo! You guys did it! Wishing you the best adventure."
-            ],
-            religious: [
-              "MashaAllah, may Allah bless your union with love, mercy, and happiness.",
-              "May Allah grant you both a pious and happy life together.",
-              "Barakallahu lakuma. May Allah bless you both and gather you in goodness.",
-              "May your marriage be a means of growing closer to Allah."
-            ]
-          },
-          relative: {
-            heartfelt: [
-              "Welcome to the family, wishing you endless joy!",
-              "Seeing you two together brings so much joy to our family.",
-              "May your home be filled with laughter and love.",
-              "So proud of you both. Wishing you a wonderful marriage."
-            ],
-            poetic: [
-              "Family is the root, and your love is the beautiful flower.",
-              "May the roots of your family tree grow deep with love and respect.",
-              "Bound by blood, united by love. Wishing you eternity.",
-              "A beautiful addition to our family garden."
-            ],
-            joyful: [
-              "Finally! Now we have another reason to celebrate!",
-              "Welcome to the chaos! Wishing you lots of fun and love.",
-              "So happy to celebrate our favorite couple!",
-              "Let's eat, drink, and celebrate your love!"
-            ],
-            religious: [
-              "SubhanAllah, what a beautiful couple. May Allah protect you.",
-              "May your union be blessed with pious children and happiness.",
-              "Praying for your happiness in this world and the Hereafter.",
-              "May Allah shower His blessings upon this marriage."
-            ]
-          },
-          colleague: {
-            heartfelt: [
-               "Wishing you a wonderful wedding day and a great life ahead.",
-               "So happy for you! Wishing you balance and bliss.",
-               "Congratulations on your big day! Best wishes from the team.",
-               "Wishing you success in your marriage, just like in your career."
-            ],
-            poetic: [
-               "May your partnership be the greatest project of your lives.",
-               "Drafting a lifetime of happiness for you both.",
-               "May your love be the foundation of a beautiful future.",
-               "Calculating infinite happiness for you two."
-            ],
-            joyful: [
-               "Congrats! (Now get back to work... just kidding!) Enjoy your honeymoon!",
-               "Happy Wedding! Wishing you a stress-free and fun life.",
-               "Best wishes on your promotion to 'Spouse'!",
-               "Cheers to the happy couple!"
-            ],
-            religious: [
-               "May God bless your marriage with peace and prosperity.",
-               "Wishing you a blessed and harmonious union.",
-               "May your life together be filled with divine blessings.",
-               "Congratulations and prayers for your new journey."
-            ]
-          },
-          well_wisher: {
-            heartfelt: [
-              "Warmest congratulations to a very special couple.",
-              "Wishing you the best as you embark on this next chapter.",
-              "May your love grow stronger each and every passing year.",
-              "Thinking of you on this special day."
-            ],
-            poetic: [
-              "May the road ahead be filled with sunshine and flowers.",
-              "Wishing you a tapestry woven with threads of golden moments.",
-              "May your love be a beacon of light.",
-              "Sailing into the sunset of love together."
-            ],
-            joyful: [
-              "Happy Wedding Day! Have a blast!",
-              "Wishing you smiles, giggles, and hugs.",
-              "Here's to a long and happy life together.",
-              "Enjoy the ride! Congratulations."
-            ],
-            religious: [
-              "Sending you prayers for a blessed marriage.",
-              "May God's grace be upon you both always.",
-              "Wishing you a union filled with faith and love.",
-              "Blessings on your wedding day."
-            ]
-          }
-        };
-
-        const handleGenerate = () => {
-          setLoading(true);
-          // Simulate "thinking" delay for better UX
-          setTimeout(() => {
-            const category = wishDatabase[relation] || wishDatabase['well_wisher'];
-            const toneList = category[tone] || category['heartfelt'];
-            // Randomly select a wish
-            const randomWish = toneList[Math.floor(Math.random() * toneList.length)];
-            
-            setWish(randomWish);
-            setLoading(false);
-            setCopied(false);
-          }, 800);
-        };
-
-        const handleCopy = () => {
-          navigator.clipboard.writeText(wish);
-          setCopied(true);
-          setTimeout(() => setCopied(false), 2000);
-        };
-
-        // Fixed Sharing Logic: Explicitly use the generated wish text
-        const handleWhatsApp = () => {
-           if (!wish) return;
-           const message = `Hey Lubna & Izaan! ${wish}`;
-           window.open(`https://wa.me/917339902034?text=${encodeURIComponent(message)}`, '_blank');
-        };
-
-        const handleSMS = () => {
-           if (!wish) return;
-           const message = `Hey Lubna & Izaan! ${wish}`;
-           // iOS uses '&' for body, Android '?', but standard is ?body=
-           // Trying a compatible format
-           window.open(`sms:+917339902034?body=${encodeURIComponent(message)}`, '_blank');
-        };
-
-        return (
-          <div className="bg-white/80 backdrop-blur-sm p-6 rounded-xl shadow-lg border border-amber-100 max-w-md mx-auto mt-12">
-            <h3 className="text-xl font-serif text-amber-800 mb-4 text-center">Write a Wish for the Couple</h3>
-            <p className="text-xs text-center text-gray-500 mb-4">Generate a beautiful message instantly.</p>
-            
-            <div className="grid grid-cols-2 gap-4 mb-4">
-              <div>
-                <label className="block text-xs font-semibold text-gray-600 mb-1 uppercase">You are a...</label>
-                <select 
-                  value={relation} 
-                  onChange={(e) => setRelation(e.target.value)}
-                  className="w-full p-2 border border-amber-200 rounded-md bg-stone-50 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500"
-                >
-                  <option value="friend">Friend</option>
-                  <option value="relative">Relative</option>
-                  <option value="colleague">Colleague</option>
-                  <option value="well_wisher">Well Wisher</option>
-                </select>
-              </div>
-              <div>
-                <label className="block text-xs font-semibold text-gray-600 mb-1 uppercase">Tone</label>
-                <select 
-                  value={tone} 
-                  onChange={(e) => setTone(e.target.value)}
-                  className="w-full p-2 border border-amber-200 rounded-md bg-stone-50 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500"
-                >
-                  <option value="heartfelt">Heartfelt</option>
-                  <option value="poetic">Poetic</option>
-                  <option value="joyful">Joyful</option>
-                  <option value="religious">Islamic/Religious</option>
-                </select>
-              </div>
+                <!-- Groom Section -->
+                <div class="groom-section">
+                    <h3 class="person-name">Mohammad Izaan</h3>
+                    <p class="person-details">Grand S/o Late Mr. Mushtaq Mohammad &amp; Mrs. Raziya Begum</p>
+                    <p class="person-details">S/o Mr. Mehmood &amp; Riyaz Mrs. Bilkiss</p>
+                </div>
             </div>
 
-            <button 
-              onClick={handleGenerate} 
-              disabled={loading}
-              className="w-full bg-amber-700 text-white py-2 rounded-md hover:bg-amber-800 transition flex items-center justify-center gap-2 disabled:opacity-50 font-serif shadow-md"
-            >
-              {loading ? <span className="animate-spin">✦</span> : <Icons.Sparkles size={16} />}
-              {loading ? 'Crafting wish...' : 'Generate Wish'}
-            </button>
+            <!-- Formal Invitation -->
+            <div class="formal-invitation">
+                <p class="invitation-message">Haji Mohammad Hussain &amp; Hajjan Jarina request the pleasure of your gracious presence on the auspicious occasion of the wedding of their Granddaughter.</p>
+            </div>
+        </div>
+    </section>
 
-            {wish && (
-              <div className="animate-fade-in">
-                <div className="mt-4 p-4 bg-amber-50 rounded-lg border border-amber-100 relative group">
-                  <p className="text-gray-700 italic font-serif text-center mb-2">"{wish}"</p>
-                  <button 
-                    onClick={handleCopy}
-                    className="absolute top-2 right-2 text-amber-600 hover:text-amber-800 p-1 rounded-full bg-white/50"
-                    title="Copy to clipboard"
-                  >
-                    {copied ? <Icons.Check size={14} /> : <Icons.Copy size={14} />}
-                  </button>
-                </div>
-                
-                <div className="mt-4 pt-4 border-t border-dashed border-amber-200">
-                   <p className="text-[10px] text-center text-gray-400 uppercase tracking-widest mb-2">Share this wish to Lubna & Izaan</p>
-                   <div className="flex gap-2">
-                     <button 
-                       onClick={handleWhatsApp}
-                       className="flex-1 bg-green-600 hover:bg-green-700 text-white py-2 rounded-md transition text-xs flex items-center justify-center gap-2 shadow"
-                     >
-                        <Icons.MessageCircle size={14} /> WhatsApp
-                     </button>
-                     <button 
-                       onClick={handleSMS}
-                       className="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-md transition text-xs flex items-center justify-center gap-2 shadow"
-                     >
-                        <Icons.MessageSquare size={14} /> Text/SMS
-                     </button>
-                   </div>
-                </div>
-              </div>
-            )}
-          </div>
-        );
-      };
+    <!-- Wedding Schedule -->
+    <section id="schedule" class="schedule-section">
+        <h2 class="section-title">Wedding Schedule</h2>
+        <div class="events-container">
+            <!-- Event 1 -->
+            <div class="event-card">
+                <span class="event-icon">💄</span>
+                <h3 class="event-name">Rasm E Haldi Mehandi</h3>
+                <p class="event-date">Friday, 9th January 2026</p>
+                <p class="event-time">2:30 PM</p>
+                <p class="event-venue">Venue: Gopal Ji Ki Kothi, Kekri</p>
+            </div>
 
-      // --- Main App Component ---
-      const App = () => {
-        const [isPlaying, setIsPlaying] = useState(false);
-        const audioRef = useRef(null);
+            <!-- Event 2 -->
+            <div class="event-card">
+                <span class="event-icon">🌹</span>
+                <h3 class="event-name">Rasm E Gulposhi</h3>
+                <p class="event-date">Friday, 9th January 2026</p>
+                <p class="event-time">4:30 PM</p>
+                <p class="event-venue">Venue: Gopal Ji Ki Kothi, Kekri</p>
+            </div>
+
+            <!-- Event 3 -->
+            <div class="event-card">
+                <span class="event-icon">🎭</span>
+                <h3 class="event-name">Mehfil E Rang E Raza</h3>
+                <p class="event-date">Friday, 9th January 2026</p>
+                <p class="event-time">7:00 PM</p>
+                <p class="event-venue">Venue: Sugan Vatika, Kekri</p>
+            </div>
+
+            <!-- Event 4 -->
+            <div class="event-card">
+                <span class="event-icon">🐴</span>
+                <h3 class="event-name">Khushamadi -E- Barat</h3>
+                <p class="event-date">Saturday, 10th January 2026</p>
+                <p class="event-time">2:30 PM (After Namaz Zohar)</p>
+            </div>
+
+            <!-- Event 5 -->
+            <div class="event-card">
+                <span class="event-icon">💍</span>
+                <h3 class="event-name">Al Nikah Min Sunnat</h3>
+                <p class="event-date">Saturday, 10th January 2026</p>
+                <p class="event-venue">Venue: Sugan Vatika, Kekri</p>
+            </div>
+
+            <!-- Event 6 - Dawate-E-Dinner AFTER Al Nikah -->
+            <div class="event-card">
+                <span class="event-icon">🍽️</span>
+                <h3 class="event-name">Dawate -E- Dinner</h3>
+                <p class="event-date">Saturday, 10th January 2026</p>
+                <p class="event-time">5:00 pm onwards</p>
+                <p class="event-venue">Venue: SUGAN VATIKA, KEKRI</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Wishes Section -->
+    <section id="wishes" class="wishes-section">
+        <div class="wishes-container">
+            <h2 class="section-title">Wedding Wishes</h2>
+            
+            <!-- Wishes Counter -->
+            <div class="wishes-counter">
+                <span class="counter-number" id="wishCounter">12</span>
+                <span class="counter-label">Beautiful Wishes</span>
+            </div>
+            
+            <div class="wishes-grid" id="wishesGrid">
+                <!-- Wishes will be dynamically generated here -->
+            </div>
+            <button class="refresh-button" onclick="generateRandomWishes()">✨ Generate New Wish</button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p class="footer-text">&copy; 2026 Lubna Wedding Invitation. All rights reserved.</p>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button id="scrollToTop" onclick="scrollToTop()" title="Back to top">↑</button>
+
+    <script>
+        // Array of wishes
+        const wishes = [
+            "Wishing you a lifetime of love and happiness",
+            "May your marriage be filled with joy and blessings",
+            "Congratulations on this beautiful new chapter",
+            "Wishing you both endless love and support",
+            "May Allah bless your union with happiness",
+            "Wishing you a marriage full of laughter and love",
+            "Congratulations! May your bond grow stronger",
+            "Wishing you both eternal love and happiness",
+            "May your wedding be the beginning of forever",
+            "Blessing you both with joy and prosperity",
+            "May love blossom in your hearts forever",
+            "Wishing you a beautiful journey together"
+        ];
         
-        const toggleMusic = () => {
-          if (audioRef.current) {
-            if (isPlaying) {
-              audioRef.current.pause();
-            } else {
-              // Handle autoplay restrictions
-              const playPromise = audioRef.current.play();
-              if (playPromise !== undefined) {
-                playPromise.catch(error => {
-                  console.log("Audio playback failed:", error);
-                });
-              }
+        const coupleName = "Lubna";
+
+        // Function to shuffle array using Fisher-Yates algorithm
+        function shuffleArray(array) {
+            const newArray = [...array];
+            for (let i = newArray.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
             }
-            setIsPlaying(!isPlaying);
-          }
-        };
+            return newArray;
+        }
 
-        return (
-          <div className="min-h-screen bg-[#fcfaf8] text-stone-800 overflow-x-hidden selection:bg-amber-200">
+        // Function to create WhatsApp share link
+        function shareToWhatsApp(wishText) {
+            const message = encodeURIComponent(`Wedding Wish for ${coupleName}:\n\n"${wishText}"\n\nWith love and blessings! 💝`);
+            const whatsappURL = `https://wa.me/?text=${message}`;
+            window.open(whatsappURL, '_blank');
+        }
+        
+        // Function to generate random wishes
+        function generateRandomWishes() {
+            const wishesGrid = document.getElementById('wishesGrid');
+            const wishCounter = document.getElementById('wishCounter');
             
-            {/* Audio Element (Hidden) */}
-            {/* Using Pachelbel's Canon - Public Domain / Creative Commons suitable for weddings */}
-            <audio 
-              ref={audioRef} 
-              loop 
-              src="https://upload.wikimedia.org/wikipedia/commons/transcoded/d/db/Pachelbel%27s_Canon.ogg/Pachelbel%27s_Canon.ogg.mp3"
-            />
-
-            {/* Sticky Music Control */}
-            <div className="fixed bottom-6 right-6 z-50">
-              <button 
-                onClick={toggleMusic}
-                className="bg-amber-800 text-white p-3 rounded-full shadow-xl hover:bg-amber-900 transition-all duration-300 flex items-center gap-2 animate-bounce-slow"
-              >
-                {isPlaying ? <Icons.Volume2 size={20} /> : <Icons.VolumeX size={20} />}
-                <span className="text-xs font-semibold hidden md:inline">Melody</span>
-              </button>
-            </div>
-
-            {/* Hero Section */}
-            <section className="relative min-h-screen flex flex-col items-center justify-center p-6 text-center overflow-hidden">
-              <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1542038784456-1ea8e935640e?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80')] opacity-5 bg-cover bg-center" />
-              <FloralCorner className="absolute top-0 left-0 text-amber-500 w-32 h-32" />
-              <FloralCorner className="absolute top-0 right-0 rotate-90 text-amber-500 w-32 h-32" />
-              <FloralCorner className="absolute bottom-0 left-0 -rotate-90 text-amber-500 w-32 h-32" />
-              <FloralCorner className="absolute bottom-0 right-0 rotate-180 text-amber-500 w-32 h-32" />
-
-              <FadeIn delay={0.2} className="relative z-10">
-                <h2 className="text-amber-700 tracking-[0.3em] text-sm md:text-base font-bold uppercase mb-4">
-                  Glorious Moments
-                </h2>
-              </FadeIn>
-              
-              <FadeIn delay={0.4} className="relative z-10">
-                 <div className="w-64 h-64 md:w-80 md:h-80 mx-auto mb-8 rounded-full overflow-hidden border-4 border-amber-200 shadow-2xl p-1 bg-white">
-                   <img 
-                     src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                     alt="Couple Art" 
-                     className="w-full h-full object-cover rounded-full hover:scale-105 transition-transform duration-700"
-                   />
-                 </div>
-              </FadeIn>
-
-              <FadeIn delay={0.6} className="relative z-10">
-                <h1 className="font-script text-6xl md:text-8xl text-amber-800 mb-2">Lubna</h1>
-                <span className="font-serif text-2xl text-amber-600 italic">&</span>
-                <h1 className="font-script text-6xl md:text-8xl text-amber-800 mt-2 mb-6">Izaan</h1>
-              </FadeIn>
-
-              <FadeIn delay={0.8} className="relative z-10">
-                <p className="font-serif text-lg md:text-xl text-stone-600 italic">
-                  Are getting married
-                </p>
-                <Divider />
-                <p className="font-cinzel text-amber-900 font-bold text-xl md:text-2xl mt-2">
-                  January 10th, 2026
-                </p>
-                <p className="font-serif text-stone-500 mt-2">Kekri, Rajasthan</p>
-              </FadeIn>
-            </section>
-
-            {/* Invocation Section */}
-            <section className="py-20 px-6 bg-white relative">
-              <div className="max-w-3xl mx-auto text-center">
-                <FadeIn>
-                  <div className="w-16 h-16 mx-auto mb-6 text-amber-600">
-                     <Icons.Invocation />
-                  </div>
-                  <p className="font-serif text-amber-800 text-lg leading-relaxed italic mb-8">
-                    "In the name of ALLAH, the Most Beneficent & Merciful,<br/>
-                    with the grace of Huzoor Nabi-E-Karim (S.A.W.)<br/>
-                    and Able Baith Panjetan-E-Pak (A.S),<br/>
-                    and with the supreme blessing of Hazrat Khwaja Ghareeb Nawaz (R.A)."
-                  </p>
-                  
-                  <p className="text-stone-600 leading-relaxed font-light mb-8">
-                    <span className="font-bold text-amber-900 text-lg block mb-2">Haji Mohammad Hussain & Hajjan Jarina</span>
-                    request the pleasure of your gracious presence on the auspicious occasion of the wedding of their Grand Daughter
-                  </p>
-
-                  <div className="flex flex-col md:flex-row justify-center items-center gap-8 my-10">
-                    <div className="flex-1">
-                      <h3 className="font-script text-4xl text-amber-700 mb-2">Lubna Hussain</h3>
-                      <p className="text-sm text-stone-500 uppercase tracking-wide">D/o Mr. Ashfaq Hussain & Mrs. Nargis Hussain</p>
-                    </div>
-                    <div className="text-2xl text-amber-400 font-serif italic">with</div>
-                    <div className="flex-1">
-                      <h3 className="font-script text-4xl text-amber-700 mb-2">Mohammad Izaan</h3>
-                      <p className="text-sm text-stone-500 uppercase tracking-wide">Grand S/o Late Mr. Mushtaq Mohammad & Mrs. Raziya Begum</p>
-                      <p className="text-sm text-stone-500 uppercase tracking-wide">S/o Mr. Mehmood Riyaz & Mrs. Bilkiss</p>
-                    </div>
-                  </div>
-                </FadeIn>
-              </div>
-            </section>
-
-            {/* Events Timeline */}
-            <section className="py-20 px-4 bg-amber-50/50">
-              <div className="max-w-4xl mx-auto">
-                <FadeIn className="text-center mb-16">
-                  <h2 className="font-cinzel text-3xl md:text-4xl text-amber-900 mb-4">Wedding Itinerary</h2>
-                  <Divider />
-                </FadeIn>
-
-                <div className="relative border-l-2 border-amber-200 ml-4 md:ml-1/2 md:border-l-0">
-                   
-                   {/* Center Line for Desktop */}
-                   <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-0.5 bg-amber-200 -translate-x-1/2"></div>
-
-                   {/* Event 1 - Friday */}
-                   <div className="mb-16 md:flex md:justify-between items-center w-full">
-                      <div className="md:w-5/12 mb-8 md:mb-0 md:text-right pr-8 order-1">
-                         <FadeIn direction="right">
-                            <div className="inline-block bg-amber-100 text-amber-800 px-4 py-1 rounded-full text-sm font-bold mb-3">
-                              Friday, 9th January 2026
-                            </div>
-                            <h3 className="font-serif text-2xl text-stone-800 font-bold mb-2">Ceremonies of Joy</h3>
-                            <div className="space-y-4 text-stone-600">
-                              <div>
-                                 <p className="font-bold text-amber-700 flex items-center md:justify-end gap-2">
-                                   <span className="md:hidden"><Icons.Clock size={16}/></span> 2:30 PM
-                                 </p>
-                                 <p>Rasm E Haldi & Mehandi</p>
-                              </div>
-                              <div>
-                                 <p className="font-bold text-amber-700 flex items-center md:justify-end gap-2">
-                                   <span className="md:hidden"><Icons.Clock size={16}/></span> 4:30 PM
-                                 </p>
-                                 <p>Rasm E Gulposhi</p>
-                              </div>
-                              <div className="text-sm italic pt-2 flex items-center md:justify-end gap-2">
-                                <Icons.MapPin size={14} /> At Gopal Ji Ki Kothi, Kekri
-                              </div>
-                            </div>
-                         </FadeIn>
-                      </div>
-                      
-                      <div className="hidden md:flex order-2 w-8 h-8 bg-amber-500 rounded-full border-4 border-white shadow absolute left-1/2 -translate-x-1/2 z-10 items-center justify-center">
-                        <Icons.Heart size={14} className="text-white" />
-                      </div>
-
-                      <div className="md:w-5/12 pl-8 order-3 opacity-0 hidden md:block">Placeholder</div>
-                   </div>
-
-                   {/* Event 2 - Friday Evening */}
-                   <div className="mb-16 md:flex md:justify-between items-center w-full">
-                      <div className="md:w-5/12 mb-8 md:mb-0 md:text-right pr-8 order-1 hidden md:block opacity-0">Placeholder</div>
-                      
-                      <div className="hidden md:flex order-2 w-8 h-8 bg-amber-500 rounded-full border-4 border-white shadow absolute left-1/2 -translate-x-1/2 z-10 items-center justify-center">
-                        <Icons.Music size={14} className="text-white" />
-                      </div>
-
-                      <div className="md:w-5/12 pl-8 order-3">
-                         <FadeIn direction="left">
-                            <h3 className="font-serif text-2xl text-stone-800 font-bold mb-2">Evening of Celebration</h3>
-                            <div className="space-y-4 text-stone-600">
-                              <div>
-                                 <p className="font-bold text-amber-700 flex items-center gap-2">
-                                   <Icons.Clock size={16}/> 5:00 PM Onwards
-                                 </p>
-                                 <p>Dawat - E - Dinner</p>
-                              </div>
-                              <div>
-                                 <p className="font-bold text-amber-700 flex items-center gap-2">
-                                   <Icons.Clock size={16}/> 7:00 PM
-                                 </p>
-                                 <p>Mehfil E Rang E Raza</p>
-                              </div>
-                              <div className="text-sm italic pt-2 flex items-center gap-2">
-                                <Icons.MapPin size={14} /> Venue: Sugan Vatika, Kekri
-                              </div>
-                            </div>
-                         </FadeIn>
-                      </div>
-                   </div>
-
-                   {/* Event 3 - Saturday */}
-                   <div className="mb-16 md:flex md:justify-between items-center w-full">
-                      <div className="md:w-5/12 mb-8 md:mb-0 md:text-right pr-8 order-1">
-                         <FadeIn direction="right">
-                            <div className="inline-block bg-amber-800 text-white px-4 py-1 rounded-full text-sm font-bold mb-3">
-                              Saturday, 10th January 2026
-                            </div>
-                            <h3 className="font-serif text-2xl text-stone-800 font-bold mb-2">The Wedding Day</h3>
-                            <div className="space-y-4 text-stone-600">
-                              <div>
-                                 <p className="font-bold text-amber-700 flex items-center md:justify-end gap-2">
-                                   <span className="md:hidden"><Icons.Clock size={16}/></span> 2:30 PM
-                                 </p>
-                                 <p>Khushamdid - E - Barat</p>
-                              </div>
-                              <div>
-                                 <p className="font-bold text-amber-700 flex items-center md:justify-end gap-2">
-                                   <span className="md:hidden"><Icons.Clock size={16}/></span> After Namaz Zohar
-                                 </p>
-                                 <p className="font-script text-2xl text-amber-600">Al Nikah Min Sunnati</p>
-                              </div>
-                              <div className="text-sm italic pt-2 flex items-center md:justify-end gap-2">
-                                <Icons.MapPin size={14} /> Venue: Sugan Vatika, Kekri
-                              </div>
-                              <div className="text-xs text-stone-400 mt-2">
-                                Insha Allah "Al Nikah - Min Sunnati"<br/>
-                                Family Location: Khanpur - Jhalawar
-                              </div>
-                            </div>
-                         </FadeIn>
-                      </div>
-
-                      <div className="hidden md:flex order-2 w-8 h-8 bg-amber-800 rounded-full border-4 border-white shadow absolute left-1/2 -translate-x-1/2 z-10 items-center justify-center">
-                        <Icons.Calendar size={14} className="text-white" />
-                      </div>
-
-                      <div className="md:w-5/12 pl-8 order-3 opacity-0 hidden md:block">Placeholder</div>
-                   </div>
-                </div>
-              </div>
-            </section>
+            // Update counter
+            wishCounter.textContent = wishes.length;
             
-            {/* Interactive Feature: Wishes */}
-            <section className="py-20 px-6 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] bg-fixed relative">
-               <div className="absolute inset-0 bg-amber-900/5"></div>
-               <div className="max-w-4xl mx-auto relative z-10">
-                  <FadeIn>
-                    <h2 className="text-center font-cinzel text-3xl text-amber-800 mb-2">Send Your Blessings</h2>
-                    <p className="text-center text-stone-600 mb-8 font-serif">
-                      Join us in spirit and craft a beautiful message for the couple.
-                    </p>
-                    <WishGenerator />
-                  </FadeIn>
-               </div>
-            </section>
+            wishesGrid.innerHTML = '';
+            
+            // Shuffle the wishes array to get random order
+            const shuffledWishes = shuffleArray(wishes);
+            
+            // Display 6 random wishes
+            const wishesToShow = shuffledWishes.slice(0, 6);
+            
+            wishesToShow.forEach((wish, index) => {
+                const wishCard = document.createElement('div');
+                wishCard.className = 'wish-card';
+                wishCard.style.animationDelay = `${index * 0.1}s`;
+                wishCard.innerHTML = `
+                    <p class="wish-text">"${wish}"</p>
+                    <button class="share-whatsapp-btn" onclick="shareToWhatsApp('${wish.replace(/'/g, "\\'")}')">📱 Share to WhatsApp</button>
+                `;
+                wishesGrid.appendChild(wishCard);
+            });
+        }
 
-            {/* Footer */}
-            <footer className="bg-stone-900 text-stone-300 py-12 px-6 text-center">
-              <FadeIn>
-                <h2 className="font-script text-5xl text-amber-500 mb-6">Thank You</h2>
-                <p className="max-w-xl mx-auto mb-8 font-light text-sm leading-loose">
-                  We look forward to celebrating this joyous occasion with you. Your presence means the world to us and adds to the happiness of this glorious day.
-                </p>
+        // Mobile menu toggle
+        function toggleMenu() {
+            const navMenu = document.getElementById('navMenu');
+            navMenu.classList.toggle('active');
+        }
+
+        function closeMenu() {
+            const navMenu = document.getElementById('navMenu');
+            navMenu.classList.remove('active');
+        }
+
+        // Smooth scrolling for navigation links with active state
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
                 
-                <div className="flex justify-center gap-4 mb-8">
-                   <button className="bg-amber-700 hover:bg-amber-600 text-white px-6 py-2 rounded-full flex items-center gap-2 transition text-sm">
-                      <Icons.Share2 size={16} /> Share Invitation
-                   </button>
-                   <a href="https://maps.google.com/?q=Sugan+Vatika+Kekri" target="_blank" rel="noreferrer" className="bg-stone-800 hover:bg-stone-700 text-white px-6 py-2 rounded-full flex items-center gap-2 transition text-sm border border-stone-700">
-                      <Icons.MapPin size={16} /> Navigate
-                   </a>
-                </div>
-
-                <Divider className="opacity-20" />
+                // Remove active class from all links
+                document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
                 
-                <p className="text-xs text-stone-500 uppercase tracking-widest mt-6">
-                  With Love & Joy from the Hussain & Riyaz Families
-                </p>
-              </FadeIn>
-            </footer>
-          </div>
-        );
-      };
+                // Add active class to clicked link
+                this.classList.add('active');
+                
+                const targetId = this.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+                if (targetSection) {
+                    targetSection.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
 
-      const root = ReactDOM.createRoot(document.getElementById('root'));
-      root.render(<App />);
+        // Set active tab on scroll
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('section[id]');
+            const scrollPosition = window.scrollY + 100;
+
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.offsetHeight;
+                const sectionId = section.getAttribute('id');
+
+                if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                    document.querySelectorAll('.nav-link').forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === '#' + sectionId) {
+                            link.classList.add('active');
+                        }
+                    });
+                }
+            });
+        });
+
+        // Set initial active state (Intro tab)
+        document.querySelector('.nav-link[href="#home"]').classList.add('active');
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(e) {
+            const navMenu = document.getElementById('navMenu');
+            const hamburger = document.querySelector('.hamburger');
+            if (!navMenu.contains(e.target) && !hamburger.contains(e.target)) {
+                navMenu.classList.remove('active');
+            }
+        });
+
+        // Scroll To Top Functionality
+        const scrollToTopButton = document.getElementById('scrollToTop');
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 150) {
+                scrollToTopButton.classList.add('show');
+            } else {
+                scrollToTopButton.classList.remove('show');
+            }
+        });
+        function scrollToTop() {
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+        // Generate wishes on page load
+        generateRandomWishes();
     </script>
-  </body>
+</body>
 </html>
