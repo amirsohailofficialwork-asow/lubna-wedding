@@ -79,6 +79,47 @@
             }
         }
 
+        .dua-section {
+            text-align: center;
+            padding: clamp(20px, 4vw, 30px) 15px;
+            margin: 15px auto;
+            opacity: 0;
+            animation: fadeIn 1.5s ease 0.5s forwards;
+        }
+
+        .dua-arabic {
+            font-size: clamp(20px, 4vw, 32px);
+            color: #ffffff;
+            font-weight: bold;
+            text-shadow: 
+                2px 2px 4px rgba(0, 0, 0, 0.3),
+                0 0 15px rgba(212, 175, 55, 0.5);
+            letter-spacing: 2px;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            direction: rtl;
+        }
+
+        .dua-english {
+            font-size: clamp(15px, 3vw, 20px);
+            color: #fff9e6;
+            font-style: italic;
+            line-height: 1.6;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+            margin-top: 12px;
+            padding: 0 10px;
+        }
+
+        .ameen {
+            font-size: clamp(16px, 3.5vw, 22px);
+            color: #d4af37;
+            font-weight: bold;
+            margin-top: 10px;
+            text-shadow: 
+                1px 1px 2px rgba(0, 0, 0, 0.4),
+                0 0 10px rgba(212, 175, 55, 0.6);
+        }
+
         .khushamdeed-banner {
             background: linear-gradient(135deg, #d4af37 0%, #ffdd77 50%, #d4af37 100%);
             text-align: center;
@@ -87,7 +128,7 @@
             border-radius: 20px;
             box-shadow: 0 15px 50px rgba(212, 175, 55, 0.6);
             opacity: 0;
-            animation: bounceIn 1.2s ease 0.3s forwards;
+            animation: bounceIn 1.2s ease 0.8s forwards;
             position: relative;
             overflow: hidden;
         }
@@ -175,7 +216,7 @@
             position: relative;
             opacity: 0;
             transform: translateY(50px);
-            animation: fadeInUp 1s ease 0.8s forwards;
+            animation: fadeInUp 1s ease 1.3s forwards;
         }
 
         @keyframes fadeInUp {
@@ -193,7 +234,7 @@
             margin-bottom: 25px;
             line-height: 1.6;
             opacity: 0;
-            animation: fadeIn 1.5s ease 1.3s forwards;
+            animation: fadeIn 1.5s ease 1.8s forwards;
             padding: 0 10px;
         }
 
@@ -207,7 +248,7 @@
             text-align: center;
             margin-bottom: 30px;
             opacity: 0;
-            animation: fadeIn 1.5s ease 1.8s forwards;
+            animation: fadeIn 1.5s ease 2.3s forwards;
             padding: 0 10px;
         }
 
@@ -243,9 +284,9 @@
                 inset 0 -5px 20px rgba(139, 69, 19, 0.2);
             opacity: 0;
             animation: 
-                glowPulse 2s ease 2s infinite,
-                fadeIn 1.5s ease 2s forwards,
-                floatUpDown 3s ease-in-out 2s infinite;
+                glowPulse 2s ease 2.5s infinite,
+                fadeIn 1.5s ease 2.5s forwards,
+                floatUpDown 3s ease-in-out 2.5s infinite;
             position: relative;
             overflow: hidden;
             border: 3px solid #8b4513;
@@ -303,7 +344,7 @@
             background: rgba(139, 69, 19, 0.05);
             border-radius: 15px;
             opacity: 0;
-            animation: slideInLeft 1s ease 2.3s forwards;
+            animation: slideInLeft 1s ease 2.8s forwards;
         }
 
         @keyframes slideInLeft {
@@ -348,7 +389,7 @@
             background: linear-gradient(135deg, #d4af37 0%, #f4e4b0 100%);
             border-radius: 15px;
             opacity: 0;
-            animation: zoomIn 1s ease 2.8s forwards;
+            animation: zoomIn 1s ease 3.3s forwards;
         }
 
         @keyframes zoomIn {
@@ -393,11 +434,11 @@
         }
 
         .day-events:nth-child(1) {
-            animation-delay: 3.3s;
+            animation-delay: 3.8s;
         }
 
         .day-events:nth-child(2) {
-            animation-delay: 3.8s;
+            animation-delay: 4.3s;
         }
 
         @keyframes slideInRight {
@@ -473,7 +514,7 @@
             text-align: center;
             margin: 25px 0;
             opacity: 0;
-            animation: fadeIn 1s ease 4.3s forwards;
+            animation: fadeIn 1s ease 4.8s forwards;
             font-size: clamp(18px, 4vw, 24px);
         }
 
@@ -527,6 +568,10 @@
             
             .container {
                 padding: 10px;
+            }
+            
+            .dua-section {
+                padding: 15px 10px;
             }
             
             .khushamdeed-banner {
@@ -622,8 +667,18 @@
             بِسْمِ اللَّـهِ الرَّحْمَـٰنِ الرَّحِيمِ
         </div>
 
+        <div class="dua-section">
+            <div class="dua-arabic">
+                بَارَكَ اللهُ لَكُمَا وَبَارِك عَلَيْكُمَا وَجَمَعَ بَيْنَكُمَا فِي خَيْرٍ
+            </div>
+            <div class="dua-english">
+                "May Allah Bless you, Shower his blessings upon you and join you together in godness"
+            </div>
+            <div class="ameen">Ameen</div>
+        </div>
+
         <div class="khushamdeed-banner">
-            <div class="khushamdeed-text">KHUSHAMDEED</div>
+            <div class="khushamdeed-text">KHUSH-AM-DEED</div>
             <div class="khushamdeed-subtitle">Welcome to the Celebration</div>
         </div>
 
@@ -654,7 +709,7 @@
             </div>
 
             <div class="main-event">
-                <h2>KEKRI</h2>
+                <h2>Khanpur - Jhalawar</h2>
                 <p>Saturday, 10th January 2026</p>
                 <p style="font-style: italic; margin-top: 10px;">Insha Allah "Al Nikah -Min Sunnati"</p>
             </div>
@@ -698,7 +753,7 @@
                     
                     <div class="event-item">
                         <div class="event-time">2:30 pm</div>
-                        <div class="event-name">Khushamdid - E- Barat</div>
+                        <div class="event-name">Khush-am-did - E- Barat</div>
                     </div>
 
                     <div class="event-item">
