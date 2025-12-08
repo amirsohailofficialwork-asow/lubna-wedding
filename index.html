@@ -7,7 +7,7 @@
     
     <!-- Open Graph Meta Tags for Link Preview -->
     <meta property="og:title" content="Lubna & Izaan Wedding Invitation">
-    <meta property="og:description" content="Join us for the wedding celebration of Lubna Hussain & Mohammad Izaan on Saturday, 10th January 2026 at Khanpur - Jhalawar">
+    <meta property="og:description" content="Join us for the wedding celebration of Lubna Hussain & Mohammad Izaan on Saturday, 10th January 2026 at SUGAN VATIKA, KEKRI">
     <meta property="og:image" content="lubna-wedding-1.jpg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
@@ -52,6 +52,42 @@
             width: 100%;
         }
 
+        .you-are-invited-top {
+            text-align: center;
+            font-size: clamp(26px, 6vw, 48px);
+            color: #ffffff;
+            font-weight: bold;
+            margin: 20px 0;
+            padding: clamp(20px, 4vw, 30px) 15px;
+            text-transform: uppercase;
+            letter-spacing: clamp(2px, 1vw, 5px);
+            background: linear-gradient(135deg, #d4af37 0%, #ffdd77 50%, #d4af37 100%);
+            border-radius: 15px;
+            box-shadow: 
+                0 10px 40px rgba(212, 175, 55, 0.6),
+                inset 0 -5px 20px rgba(139, 69, 19, 0.2);
+            opacity: 0;
+            animation: 
+                glowPulse 2s ease 0.3s infinite,
+                fadeIn 1.5s ease 0.3s forwards,
+                floatUpDown 3s ease-in-out 0.3s infinite;
+            position: relative;
+            overflow: hidden;
+            border: 3px solid #8b4513;
+            word-wrap: break-word;
+        }
+
+        .you-are-invited-top::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            animation: shineInvite 2.5s infinite;
+        }
+
         .bismillah-arabic {
             text-align: center;
             font-size: clamp(24px, 5vw, 42px);
@@ -63,7 +99,7 @@
                 2px 2px 4px rgba(0, 0, 0, 0.3),
                 0 0 20px rgba(212, 175, 55, 0.6);
             opacity: 0;
-            animation: fadeInDown 1.5s ease forwards;
+            animation: fadeInDown 1.5s ease 0.8s forwards;
             letter-spacing: 2px;
             line-height: 1.4;
         }
@@ -79,12 +115,99 @@
             }
         }
 
+        .nikah-banner {
+            background: linear-gradient(135deg, #d4af37 0%, #ffdd77 50%, #d4af37 100%);
+            text-align: center;
+            padding: clamp(25px, 5vw, 40px) 20px;
+            margin: 20px auto;
+            border-radius: 20px;
+            box-shadow: 0 15px 50px rgba(212, 175, 55, 0.6);
+            opacity: 0;
+            animation: bounceIn 1.2s ease 1.3s forwards;
+            position: relative;
+            overflow: hidden;
+        }
+
+        @keyframes bounceIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.3);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.05);
+            }
+            70% {
+                transform: scale(0.9);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .nikah-banner::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% {
+                transform: translateX(-100%) translateY(-100%) rotate(45deg);
+            }
+            100% {
+                transform: translateX(100%) translateY(100%) rotate(45deg);
+            }
+        }
+
+        .nikah-text {
+            font-size: clamp(28px, 8vw, 56px);
+            font-weight: bold;
+            color: #8b4513;
+            text-transform: uppercase;
+            letter-spacing: clamp(2px, 1vw, 8px);
+            text-shadow: 
+                2px 2px 0px rgba(255, 255, 255, 0.5),
+                4px 4px 0px rgba(139, 69, 19, 0.3),
+                0 0 20px rgba(255, 221, 119, 0.8);
+            animation: textPulse 2s ease-in-out infinite;
+            position: relative;
+            z-index: 2;
+            line-height: 1.2;
+            word-wrap: break-word;
+        }
+
+        @keyframes textPulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        .nikah-subtitle {
+            font-size: clamp(16px, 3vw, 22px);
+            color: #8b4513;
+            margin-top: 12px;
+            font-style: italic;
+            position: relative;
+            z-index: 2;
+            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
+        }
+
         .dua-section {
             text-align: center;
             padding: clamp(20px, 4vw, 30px) 15px;
             margin: 15px auto;
             opacity: 0;
-            animation: fadeIn 1.5s ease 0.5s forwards;
+            animation: fadeIn 1.5s ease 1.8s forwards;
         }
 
         .dua-arabic {
@@ -128,27 +251,9 @@
             border-radius: 20px;
             box-shadow: 0 15px 50px rgba(212, 175, 55, 0.6);
             opacity: 0;
-            animation: bounceIn 1.2s ease 0.8s forwards;
+            animation: bounceIn 1.2s ease 2.3s forwards;
             position: relative;
             overflow: hidden;
-        }
-
-        @keyframes bounceIn {
-            0% {
-                opacity: 0;
-                transform: scale(0.3);
-            }
-            50% {
-                opacity: 1;
-                transform: scale(1.05);
-            }
-            70% {
-                transform: scale(0.9);
-            }
-            100% {
-                opacity: 1;
-                transform: scale(1);
-            }
         }
 
         .khushamdeed-banner::before {
@@ -160,15 +265,6 @@
             height: 200%;
             background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
             animation: shine 3s infinite;
-        }
-
-        @keyframes shine {
-            0% {
-                transform: translateX(-100%) translateY(-100%) rotate(45deg);
-            }
-            100% {
-                transform: translateX(100%) translateY(100%) rotate(45deg);
-            }
         }
 
         .khushamdeed-text {
@@ -186,15 +282,6 @@
             z-index: 2;
             line-height: 1.2;
             word-wrap: break-word;
-        }
-
-        @keyframes textPulse {
-            0%, 100% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.05);
-            }
         }
 
         .khushamdeed-subtitle {
@@ -216,7 +303,7 @@
             position: relative;
             opacity: 0;
             transform: translateY(50px);
-            animation: fadeInUp 1s ease 1.3s forwards;
+            animation: fadeInUp 1s ease 2.8s forwards;
         }
 
         @keyframes fadeInUp {
@@ -234,7 +321,7 @@
             margin-bottom: 25px;
             line-height: 1.6;
             opacity: 0;
-            animation: fadeIn 1.5s ease 1.8s forwards;
+            animation: fadeIn 1.5s ease 3.3s forwards;
             padding: 0 10px;
         }
 
@@ -248,7 +335,7 @@
             text-align: center;
             margin-bottom: 30px;
             opacity: 0;
-            animation: fadeIn 1.5s ease 2.3s forwards;
+            animation: fadeIn 1.5s ease 3.8s forwards;
             padding: 0 10px;
         }
 
@@ -266,42 +353,6 @@
             color: #555;
             line-height: 1.6;
             margin-bottom: 8px;
-        }
-
-        .you-are-invited {
-            text-align: center;
-            font-size: clamp(26px, 6vw, 48px);
-            color: #ffffff;
-            font-weight: bold;
-            margin: 30px 0;
-            padding: clamp(20px, 4vw, 30px) 15px;
-            text-transform: uppercase;
-            letter-spacing: clamp(2px, 1vw, 5px);
-            background: linear-gradient(135deg, #d4af37 0%, #ffdd77 50%, #d4af37 100%);
-            border-radius: 15px;
-            box-shadow: 
-                0 10px 40px rgba(212, 175, 55, 0.6),
-                inset 0 -5px 20px rgba(139, 69, 19, 0.2);
-            opacity: 0;
-            animation: 
-                glowPulse 2s ease 2.5s infinite,
-                fadeIn 1.5s ease 2.5s forwards,
-                floatUpDown 3s ease-in-out 2.5s infinite;
-            position: relative;
-            overflow: hidden;
-            border: 3px solid #8b4513;
-            word-wrap: break-word;
-        }
-
-        .you-are-invited::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-            animation: shineInvite 2.5s infinite;
         }
 
         @keyframes glowPulse {
@@ -344,7 +395,7 @@
             background: rgba(139, 69, 19, 0.05);
             border-radius: 15px;
             opacity: 0;
-            animation: slideInLeft 1s ease 2.8s forwards;
+            animation: slideInLeft 1s ease 4.3s forwards;
         }
 
         @keyframes slideInLeft {
@@ -389,7 +440,7 @@
             background: linear-gradient(135deg, #d4af37 0%, #f4e4b0 100%);
             border-radius: 15px;
             opacity: 0;
-            animation: zoomIn 1s ease 3.3s forwards;
+            animation: zoomIn 1s ease 4.8s forwards;
         }
 
         @keyframes zoomIn {
@@ -434,11 +485,11 @@
         }
 
         .day-events:nth-child(1) {
-            animation-delay: 3.8s;
+            animation-delay: 5.3s;
         }
 
         .day-events:nth-child(2) {
-            animation-delay: 4.3s;
+            animation-delay: 5.8s;
         }
 
         @keyframes slideInRight {
@@ -514,7 +565,7 @@
             text-align: center;
             margin: 25px 0;
             opacity: 0;
-            animation: fadeIn 1s ease 4.8s forwards;
+            animation: fadeIn 1s ease 6.3s forwards;
             font-size: clamp(18px, 4vw, 24px);
         }
 
@@ -523,6 +574,139 @@
             content: "❋";
             color: #d4af37;
             margin: 0 15px;
+        }
+
+        /* Wedding Wishes Section */
+        .wishes-section {
+            background: linear-gradient(to bottom, #fff9e6, #ffffff);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            padding: clamp(25px, 5vw, 40px) clamp(20px, 4vw, 40px);
+            margin: 40px auto;
+            opacity: 0;
+            animation: fadeInUp 1s ease 6.8s forwards;
+        }
+
+        .wishes-section h2 {
+            font-size: clamp(24px, 5vw, 36px);
+            color: #8b4513;
+            text-align: center;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .quote-container {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(255, 249, 230, 0.8));
+            border: 2px solid #d4af37;
+            border-radius: 15px;
+            padding: clamp(20px, 4vw, 30px);
+            margin: 20px 0;
+            position: relative;
+            min-height: 150px;
+        }
+
+        .quote-container::before {
+            content: '"';
+            font-size: 60px;
+            color: #d4af37;
+            position: absolute;
+            top: -10px;
+            left: 15px;
+            opacity: 0.3;
+        }
+
+        .quote-text {
+            font-size: clamp(16px, 3vw, 20px);
+            color: #555;
+            line-height: 1.7;
+            text-align: center;
+            font-style: italic;
+            padding: 10px 20px;
+        }
+
+        .quote-author {
+            text-align: right;
+            font-size: clamp(14px, 2.5vw, 16px);
+            color: #8b4513;
+            margin-top: 15px;
+            padding-right: 20px;
+        }
+
+        .controls-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 25px;
+        }
+
+        .btn {
+            padding: clamp(12px, 2.5vw, 15px) clamp(20px, 4vw, 30px);
+            border: none;
+            border-radius: 10px;
+            font-size: clamp(14px, 2.5vw, 16px);
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Georgia', serif;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .btn-generate {
+            background: linear-gradient(135deg, #d4af37 0%, #f4e4b0 100%);
+            color: #8b4513;
+        }
+
+        .btn-generate:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
+        }
+
+        .btn-whatsapp {
+            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+            color: white;
+        }
+
+        .btn-whatsapp:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+        }
+
+        .btn:active {
+            transform: scale(0.98);
+        }
+
+        /* Copyright Section */
+        .copyright {
+            text-align: center;
+            padding: clamp(20px, 4vw, 30px) 15px;
+            margin-top: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            color: #ffffff;
+            font-size: clamp(13px, 2.5vw, 15px);
+            line-height: 1.6;
+            opacity: 0;
+            animation: fadeIn 1s ease 7.3s forwards;
+        }
+
+        .copyright p {
+            margin: 5px 0;
+        }
+
+        .copyright a {
+            color: #d4af37;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .copyright a:hover {
+            text-decoration: underline;
         }
 
         .floating-hearts {
@@ -570,6 +754,11 @@
                 padding: 10px;
             }
             
+            .nikah-banner {
+                padding: 20px 15px;
+                margin: 15px auto;
+            }
+            
             .dua-section {
                 padding: 15px 10px;
             }
@@ -585,8 +774,8 @@
                 border-radius: 15px;
             }
             
-            .you-are-invited {
-                margin: 20px 0;
+            .you-are-invited-top {
+                margin: 15px 0;
                 padding: 18px 12px;
                 border-width: 2px;
             }
@@ -598,6 +787,15 @@
             .day-events {
                 padding: 18px 12px;
                 margin: 20px 0;
+            }
+
+            .controls-container {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
             }
         }
 
@@ -663,8 +861,17 @@
     </div>
 
     <div class="container">
+        <div class="you-are-invited-top">
+            You Are Invited
+        </div>
+
         <div class="bismillah-arabic">
             بِسْمِ اللَّـهِ الرَّحْمَـٰنِ الرَّحِيمِ
+        </div>
+
+        <div class="nikah-banner">
+            <div class="nikah-text">An-Nikah Min Sunnati</div>
+            <div class="nikah-subtitle">النِّكَاحُ مِنْ سُنَّتِي</div>
         </div>
 
         <div class="dua-section">
@@ -690,11 +897,7 @@
             <div class="header">
                 <h1>Wedding Invitation</h1>
                 <p><strong>HAJI MOHAMMAD HUSSAIN & HAJJAN JARINA</strong></p>
-                <p>Request the pleasure of your gracious presence on the auspicious occasion of the wedding of their Grand Daughter.</p>
-            </div>
-
-            <div class="you-are-invited">
-                You Are Invited
+                <p>Your presence is requested at their Grand Daughter's wedding..</p>
             </div>
 
             <div class="couple-section">
@@ -709,15 +912,15 @@
             </div>
 
             <div class="main-event">
-                <h2>Khanpur - Jhalawar</h2>
+                <h2>KEKRI</h2>
                 <p>Saturday, 10th January 2026</p>
-                <p style="font-style: italic; margin-top: 10px;">Insha Allah "Al Nikah -Min Sunnati"</p>
+                <p style="font-style: italic; margin-top: 10px;">Insha Allah "An-Nikah Min Sunnati"</p>
             </div>
 
             <div class="decorative-divider">✦ ✦ ✦</div>
 
             <div class="princess-invite">
-                Our Family Princess Lezin with sweet Request Enjoyed<br>
+                Our Family Princess LEZIN with sweet Request Enjoyed<br>
                 <strong>GLORIOUS MOMENTS</strong>
             </div>
 
@@ -753,7 +956,7 @@
                     
                     <div class="event-item">
                         <div class="event-time">2:30 pm</div>
-                        <div class="event-name">Khush-am-did - E- Barat</div>
+                        <div class="event-name">Khushamdid - E- Barat</div>
                     </div>
 
                     <div class="event-item">
@@ -769,9 +972,110 @@
                 </div>
             </div>
         </div>
+
+        <!-- Wedding Wishes Section -->
+        <div class="wishes-section">
+            <h2>Send Your Blessings</h2>
+            <div class="quote-container" id="quoteContainer">
+                <p class="quote-text" id="quoteText">Click "Generate Wish" to create a beautiful blessing message for Lubna & Izaan</p>
+                <p class="quote-author" id="quoteAuthor"></p>
+            </div>
+            <div class="controls-container">
+                <button class="btn btn-generate" onclick="generateQuote()">
+                    ✨ Generate Wish
+                </button>
+                <button class="btn btn-whatsapp" onclick="shareToWhatsApp()">
+                    💬 Share to Lubna
+                </button>
+            </div>
+        </div>
+
+        <!-- Copyright Section -->
+        <div class="copyright">
+            <p>© 2026 Lubna & Izaan Wedding</p>
+            <p>With love and blessings from family and friends</p>
+            <p>Design & Development by <a href="#">Amir Sohail</a></p>
+        </div>
     </div>
 
     <script>
+        // Wedding wishes quotes array
+        const weddingQuotes = [
+            {
+                text: "May Allah bless Lubna and Izaan with endless love, joy, and prosperity. May their marriage be filled with happiness and understanding. Congratulations on this beautiful union!",
+                author: "- With warm wishes"
+            },
+            {
+                text: "Wishing Lubna and Izaan a lifetime of love and happiness together. May Allah shower His countless blessings upon you both. Mubarak on your Nikah!",
+                author: "- Heartfelt congratulations"
+            },
+            {
+                text: "Dear Lubna and Izaan, may your love story be as magical as the day you say 'I do'. May Allah grant you both a blessed and joyful married life filled with beautiful memories.",
+                author: "- Best wishes always"
+            },
+            {
+                text: "Congratulations to Lubna and Izaan! May your marriage be blessed with love, laughter, and eternal joy. May Allah keep you both happy and united forever.",
+                author: "- With prayers and blessings"
+            },
+            {
+                text: "To Lubna and Izaan, may Allah bless your union with love, peace, and companionship. Wishing you a wonderful journey filled with beautiful moments together.",
+                author: "- Sincere wishes"
+            },
+            {
+                text: "May Allah grant Lubna and Izaan a marriage filled with love, respect, and understanding. Congratulations on finding your perfect match. Nikah Mubarak!",
+                author: "- Warm blessings"
+            },
+            {
+                text: "Wishing Lubna and Izaan all the happiness in the world. May Allah bless your marriage with joy, prosperity, and endless love. Congratulations on this special day!",
+                author: "- With love and prayers"
+            },
+            {
+                text: "Dear Lubna and Izaan, may your life together be filled with unforgettable moments and beautiful memories. May Allah protect and guide you always. Nikah Mubarak!",
+                author: "- Heartfelt blessings"
+            },
+            {
+                text: "Congratulations Lubna and Izaan! May your marriage be a source of joy and strength. May Allah bless you both with a lifetime of happiness and togetherness.",
+                author: "- Best wishes"
+            },
+            {
+                text: "To the beautiful couple Lubna and Izaan, may Allah fill your married life with love, laughter, and countless blessings. Wishing you eternal happiness together!",
+                author: "- Warm regards"
+            }
+        ];
+
+        let currentQuote = null;
+
+        function generateQuote() {
+            const randomIndex = Math.floor(Math.random() * weddingQuotes.length);
+            currentQuote = weddingQuotes[randomIndex];
+            
+            document.getElementById('quoteText').textContent = currentQuote.text;
+            document.getElementById('quoteAuthor').textContent = currentQuote.author;
+            
+            // Add animation
+            const container = document.getElementById('quoteContainer');
+            container.style.animation = 'none';
+            setTimeout(() => {
+                container.style.animation = 'fadeIn 0.5s ease forwards';
+            }, 10);
+        }
+
+        function shareToWhatsApp() {
+            if (!currentQuote) {
+                alert('Please generate a wish first!');
+                return;
+            }
+            
+            // Lubna's WhatsApp number (replace with actual number)
+            const phoneNumber = '917339902034'; // Format: country code + number without +
+            const message = encodeURIComponent(
+                `${currentQuote.text}\n\n${currentQuote.author}\n\n💐 Wedding wishes for Lubna & Izaan 💐`
+            );
+            
+            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;
+            window.open(whatsappUrl, '_blank');
+        }
+
         // Add scroll reveal effects
         window.addEventListener('scroll', () => {
             const elements = document.querySelectorAll('.event-item');
@@ -814,6 +1118,11 @@
                 el.style.transition = 'none';
             });
         }
+
+        // Generate initial quote on page load
+        window.addEventListener('load', () => {
+            setTimeout(generateQuote, 7500);
+        });
     </script>
 </body>
 </html>
